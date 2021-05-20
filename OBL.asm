@@ -12,7 +12,7 @@ li $a3, 0x00ff0ff0
 
 jal RectanguloVertical
 
-fin:
+
 li $v0 10
 syscall 
                                          
