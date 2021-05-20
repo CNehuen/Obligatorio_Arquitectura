@@ -12,9 +12,10 @@ li $a3, 0x00ff0ff0
 
 jal RectanguloVertical
 
-
+termina_codigo:
+li $t0,20
 li $v0 10
- 
+syscall
                                          
                                                                                                                              
 RectanguloVertical:   #Funcion (x,y, cantidad rectangulos, color)
