@@ -14,7 +14,7 @@ jal RectanguloVertical
 
 
 li $v0 10
-syscall 
+ 
                                          
                                                                                                                              
 RectanguloVertical:   #Funcion (x,y, cantidad rectangulos, color)
