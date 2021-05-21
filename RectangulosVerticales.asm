@@ -1,24 +1,9 @@
-.data 
-img: .space 128 #32rectangulos de 16x16 (1word x rectangulo) cada uno de los 3 colores 
-	                                   # (1 bye x cada uno de los 3 colores y 1 lo tira)
-.text
-
-#addi $t0, $t0, 32            #Cambia colores de rectangulo, segun byte (azul, verde,rojo)
-#addi $t1, $t1, 0x00ffffff  
-li $a0, 5
-li $a1, 1
-li $a2, 2
-li $a3, 0x00ff0ff0
-
-jal RectanguloVertical
-
-termina_codigo:
-li $t0,20
-li $v0 10
-syscall
-                                         
+.globl RectangulosVerticales                                       
                                                                                                                              
-RectanguloVertical:   #Funcion (x,y, cantidad rectangulos, color)
+RectangulosVerticales:   
+	#Funcion que pinta rectangulos verticalemte desde la pisicion (x,y) 
+	#hacia abajo n veces, del color pasado por parametro
+	#Parametros:
 	#$a0 -> posicion en x
 	#$a1 -> posicion en y
 	#$a2 -> cantidad de rectangulos a pintar
