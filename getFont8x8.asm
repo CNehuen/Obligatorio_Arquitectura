@@ -1,21 +1,7 @@
-##########################
-
-#Menu Principal 
-#Elegir juego
-#Flappy Bird 
-#El otro juego
-#Nueva partida
-#Ranking
-#Su puntaje (String) : (durante un tiempo determinado) (Temporizador) 
-#Puntaje (int)
-#Salir 
-
-
-
 .globl getFont8x8
 
 getFont8x8: 
-	#Va recibir en a0 el char 
+	#a0 -> char que debe devolver en formato font8x8 para dibujar en el display
 	la $t0, font8x8
 	beq $a0, "A", devuelvoA
 	beq $a0, "B", devuelvoB
@@ -74,13 +60,9 @@ devuelvoA:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
          
-      
-      
 devuelvoB:
-
       li $t1, 0x3F 
       sb $t1 , ($t0)
       li $t1, 0x66 
@@ -97,13 +79,9 @@ devuelvoB:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
 
-
-
 devuelvoC:
-
       li $t1, 0x3C
       sb $t1 , ($t0)
       li $t1, 0x66 
@@ -119,11 +97,10 @@ devuelvoC:
       li $t1, 0x3C 
       sb $t1 , 6($t0)
       li $t1, 0x00 
-      sb $t1 , 7($t0)
-      
+      sb $t1 , 7($t0)      
       j fin 
+      
 devuelvoD:
-
   	  li $t1, 0x1F 
       sb $t1 , ($t0)
       li $t1, 0x36
@@ -140,10 +117,9 @@ devuelvoD:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoE:
-
       li $t1, 0x7F
       sb $t1 , ($t0)
       li $t1, 0x46
@@ -159,12 +135,10 @@ devuelvoE:
       li $t1, 0x7F 
       sb $t1 , 6($t0)
       li $t1, 0x00 
-      sb $t1 , 7($t0)
-      
+      sb $t1 , 7($t0)      
       j fin 
 
 devuelvoF:
-
       li $t1, 0x7F
       sb $t1 , ($t0)
       li $t1, 0x46 
@@ -181,8 +155,8 @@ devuelvoF:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoG:	
       li $t1, 0x3C 
       sb $t1 , ($t0)
@@ -199,8 +173,7 @@ devuelvoG:
       li $t1, 0x7C 
       sb $t1 , 6($t0)
       li $t1, 0x00 
-      sb $t1 , 7($t0)
-      
+      sb $t1 , 7($t0)      
       j fin 
 
 devuelvoH:
@@ -219,8 +192,7 @@ devuelvoH:
       li $t1, 0x33 
       sb $t1 , 6($t0)
       li $t1, 0x00 
-      sb $t1 , 7($t0)
-      
+      sb $t1 , 7($t0)      
       j fin 
 
 devuelvoI:
@@ -240,7 +212,6 @@ devuelvoI:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
 
 devuelvoJ:
@@ -260,7 +231,6 @@ devuelvoJ:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
 
 devuelvoK:
@@ -280,8 +250,8 @@ devuelvoK:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoL:
       li $t1, 0x0F 
       sb $t1 , ($t0)
@@ -299,8 +269,8 @@ devuelvoL:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoM:	
       li $t1, 0x63
       sb $t1 , ($t0)
@@ -318,8 +288,8 @@ devuelvoM:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoN:
       li $t1, 0x63 
       sb $t1 , ($t0)
@@ -337,8 +307,8 @@ devuelvoN:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoO:
       li $t1, 0x1C 
       sb $t1 , ($t0)
@@ -356,8 +326,8 @@ devuelvoO:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoP:
       li $t1, 0x3F 
       sb $t1 , ($t0)
@@ -375,8 +345,8 @@ devuelvoP:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoQ:
       li $t1, 0x1E 
       sb $t1 , ($t0)
@@ -394,8 +364,8 @@ devuelvoQ:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoR:
       li $t1, 0x3F
       sb $t1 , ($t0)
@@ -413,8 +383,8 @@ devuelvoR:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoS:	
       li $t1, 0x1E 
       sb $t1 , ($t0)
@@ -432,8 +402,8 @@ devuelvoS:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoT:
       li $t1, 0x3F 
       sb $t1 , ($t0)
@@ -451,8 +421,8 @@ devuelvoT:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoU:
       li $t1, 0x33 
       sb $t1 , ($t0)
@@ -470,8 +440,8 @@ devuelvoU:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoV:
       li $t1, 0x33 
       sb $t1 , ($t0)
@@ -489,8 +459,8 @@ devuelvoV:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoW:
       li $t1, 0x63 
       sb $t1 , ($t0)
@@ -508,8 +478,8 @@ devuelvoW:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoX:
       li $t1, 0x63 
       sb $t1 , ($t0)
@@ -527,8 +497,8 @@ devuelvoX:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoY:	
       li $t1, 0x33 
       sb $t1 , ($t0)
@@ -546,8 +516,8 @@ devuelvoY:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoZ:
       li $t1, 0x7F 
       sb $t1 , ($t0)
@@ -565,8 +535,8 @@ devuelvoZ:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvoDosPuntos:
       li $t1, 0x00 
       sb $t1 , ($t0)
@@ -584,8 +554,8 @@ devuelvoDosPuntos:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvo0:
       li $t1, 0x3E 
       sb $t1 , ($t0)
@@ -603,8 +573,8 @@ devuelvo0:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvo1:
       li $t1, 0x0C 
       sb $t1 , ($t0)
@@ -622,8 +592,8 @@ devuelvo1:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvo2:
       li $t1, 0x1E 
       sb $t1 , ($t0)
@@ -641,8 +611,8 @@ devuelvo2:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvo3:	
       li $t1, 0x1E 
       sb $t1 , ($t0)
@@ -660,8 +630,8 @@ devuelvo3:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvo4:
       li $t1, 0x38 
       sb $t1 , ($t0)
@@ -679,8 +649,8 @@ devuelvo4:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvo5:
       li $t1, 0x3F 
       sb $t1 , ($t0)
@@ -698,9 +668,7 @@ devuelvo5:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
-
 
 devuelvo6:
       li $t1, 0x1C 
@@ -718,9 +686,9 @@ devuelvo6:
       li $t1, 0x1E 
       sb $t1 , 6($t0)
       li $t1, 0x00 
-      sb $t1 , 7($t0)
-      
+      sb $t1 , 7($t0)      
       j fin 
+      
 devuelvo7:
       li $t1, 0x3F 
       sb $t1 , ($t0)
@@ -738,8 +706,8 @@ devuelvo7:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvo8:
       li $t1,  0x1E 
       sb $t1 , ($t0)
@@ -757,8 +725,8 @@ devuelvo8:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
+      
 devuelvo9:	
       li $t1, 0x1E 
       sb $t1 , ($t0)
@@ -776,9 +744,8 @@ devuelvo9:
       sb $t1 , 6($t0)
       li $t1, 0x00 
       sb $t1 , 7($t0)
-      
       j fin 
 
-fin:
-jr $ra 
+	  fin:
+      jr $ra 
   
