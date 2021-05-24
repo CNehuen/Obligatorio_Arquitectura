@@ -5,14 +5,22 @@
 #Version Desktop
 .globl main
 .globl img
+.globl String8x8 
+.globl Int8x8 
+.globl font8x8
 .data 
+font8x8: .space 8 
 img: .space 128 #espacio de memoria para la imagen 
 #La imagen se compone de rectangulos de n*m bits
 #Cada rectangulo tiene asignado un word para la seleccion de colores
 #El byte LSB para el canal B, el siguiente para el G, el siguiente para el R, y el MSB se desperdicia
+String8x8: .space 17 #Para los strings 
+Int8x8: .space 4 #Para los numeros
 .eqv keyboard_cmd 0xFFFF0012
 .eqv keyboard_pressed 0xFFFF0014
 .text
+
+
 main:
 	jal MenuElegirJuego #menu de seleccion de juego
 	beqz $v0,inicio_flappy_bird
