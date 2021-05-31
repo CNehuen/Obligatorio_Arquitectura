@@ -3,45 +3,66 @@
 getFont8x8: 
 	#a0 -> char que debe devolver en formato font8x8 para dibujar en el display
 	la $t0, font8x8
-	beq $a0, "A", devuelvoA
-	beq $a0, "B", devuelvoB
-	beq $a0, "C", devuelvoC
-	beq $a0, "D", devuelvoD
-	beq $a0, "E", devuelvoE
-	beq $a0, "F", devuelvoF
-	beq $a0, "G", devuelvoG
-	beq $a0, "H", devuelvoH
-	beq $a0, "I", devuelvoI
-	beq $a0, "J", devuelvoJ
-	beq $a0, "K", devuelvoK
-	beq $a0, "L", devuelvoL
-	beq $a0, "M", devuelvoM
-	beq $a0, "N", devuelvoN
-	beq $a0, "O", devuelvoO
-	beq $a0, "P", devuelvoP
-	beq $a0, "Q", devuelvoQ
-	beq $a0, "R", devuelvoR
-	beq $a0, "S", devuelvoS
-	beq $a0, "T", devuelvoT
-	beq $a0, "U", devuelvoU
-	beq $a0, "V", devuelvoV
-	beq $a0, "W", devuelvoW
-	beq $a0, "X", devuelvoX
-	beq $a0, "Y", devuelvoY
-	beq $a0, "Z", devuelvoZ
-	beq $a0, ":", devuelvoDosPuntos
-	beq $a0, "0", devuelvo0
-	beq $a0, "1", devuelvo1
-	beq $a0, "2", devuelvo2
-	beq $a0, "3", devuelvo3
-	beq $a0, "4", devuelvo4
-	beq $a0, "5", devuelvo5
-	beq $a0, "6", devuelvo6
-	beq $a0, "7", devuelvo7
-	beq $a0, "8", devuelvo8
-	beq $a0, "9", devuelvo9
+	beq $a0, ' ', devuelvoEspacio
+	beq $a0, 'A', devuelvoA
+	beq $a0, 'B', devuelvoB
+	beq $a0, 'C', devuelvoC
+	beq $a0, 'D', devuelvoD
+	beq $a0, 'E', devuelvoE
+	beq $a0, 'F', devuelvoF
+	beq $a0, 'G', devuelvoG
+	beq $a0, 'H', devuelvoH
+	beq $a0, 'I', devuelvoI
+	beq $a0, 'J', devuelvoJ
+	beq $a0, 'K', devuelvoK
+	beq $a0, 'L', devuelvoL
+	beq $a0, 'M', devuelvoM
+	beq $a0, 'N', devuelvoN
+	beq $a0, 'O', devuelvoO
+	beq $a0, 'P', devuelvoP
+	beq $a0, 'Q', devuelvoQ
+	beq $a0, 'R', devuelvoR
+	beq $a0, 'S', devuelvoS
+	beq $a0, 'T', devuelvoT
+	beq $a0, 'U', devuelvoU
+	beq $a0, 'V', devuelvoV
+	beq $a0, 'W', devuelvoW
+	beq $a0, 'X', devuelvoX
+	beq $a0, 'Y', devuelvoY
+	beq $a0, 'Z', devuelvoZ
+	beq $a0, ':', devuelvoDosPuntos
+	beq $a0, '0', devuelvo0
+	beq $a0, '1', devuelvo1
+	beq $a0, '2', devuelvo2
+	beq $a0, '3', devuelvo3
+	beq $a0, '4', devuelvo4
+	beq $a0, '5', devuelvo5
+	beq $a0, '6', devuelvo6
+	beq $a0, '7', devuelvo7
+	beq $a0, '8', devuelvo8
+	beq $a0, '9', devuelvo9
 	j fin 
 
+devuelvoEspacio:	
+	#{0x0C, 0x1E, 0x33, 0x33, 0x3F, 0x33, 0x33, 0x00} 
+      li $t1, 0x00 
+      sb $t1 , ($t0)
+      li $t1, 0x00 
+      sb $t1 , 1($t0)
+      li $t1, 0x00
+      sb $t1 , 2($t0)
+      li $t1, 0x00 
+      sb $t1 , 3($t0)
+      li $t1, 0x00 
+      sb $t1 , 4($t0)
+      li $t1, 0x00 
+      sb $t1 , 5($t0)
+      li $t1, 0x00 
+      sb $t1 , 6($t0)
+      li $t1, 0x00 
+      sb $t1 , 7($t0)
+      j fin 
+      
 devuelvoA:	
 	#{0x0C, 0x1E, 0x33, 0x33, 0x3F, 0x33, 0x33, 0x00} 
       li $t1, 0x0C 
