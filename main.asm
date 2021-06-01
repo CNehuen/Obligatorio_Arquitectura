@@ -15,7 +15,8 @@ font8x8: .space 8
 #Cada rectangulo tiene asignado un word para la seleccion de colores
 #El byte LSB para el canal B, el siguiente para el G, el siguiente para el R, y el MSB se desperdicia
 String8x8: .space 17 #Para los strings 
-Int8x8: .space 4 #Para los numeros
+.align 2
+Int8x8: .asciiz "0000" #Para dibujar los numeros
 MenuPrincipal: .asciiz "MENU PRINCIPAL"
 StringOtroJuego: .asciiz "OTRO JUEGO"
 StringFlappy: .asciiz "FLAPPY BIRD"
@@ -28,10 +29,10 @@ MenuJuego3: .asciiz "SALIR"
 
 
 main:
-	la $a0, StringFlappy
-	li $a1, 2
-	li $a2, 2
-	jal dibujarString
+	#la $a0, StringFlappy
+	#li $a1, 2
+	#li $a2, 2
+	#jal dibujarString
 	la $a0, MenuJuego1
 	li $a1, 2
 	li $a2, 22
@@ -54,7 +55,7 @@ main:
 		j terminar_consola
 	inicio_otro_juego:
 	
-	termiar consola:
+	terminar_consola:
 	li $v0 10
 	syscall
 	
@@ -64,6 +65,8 @@ MenuElegirJuego:
 	la $t1, keyboard_cmd
 	li $t2, 0x1
 	sb $t2,($t1)
+	li $v0,0
+	j salgo
 	loop:
 		lbu $t3,($t0)
 		lbu $t4,($t1)

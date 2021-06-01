@@ -19,22 +19,22 @@ menu:
 	#li $a2, 42
 	#jal dibujarString
 
-	la $a0, StringFlappy
-	li $a1, 2
-	li $a2, 2
-	jal dibujarString
-	la $a0, MenuJuego1
-	li $a1, 2
-	li $a2, 22
-	jal dibujarString
-	la $a0, MenuJuego2
-	li $a1, 2
-	li $a2, 32
-	jal dibujarString
-	la $a0, MenuJuego3
-	li $a1, 2
-	li $a2, 42
-	jal dibujarString
+	#la $a0, StringFlappy
+	#li $a1, 2
+	#li $a2, 2
+	#jal dibujarString
+	#la $a0, MenuJuego1
+	#li $a1, 2
+	#li $a2, 22
+	#jal dibujarString
+	#la $a0, MenuJuego2
+	#li $a1, 2
+	#li $a2, 32
+	#jal dibujarString
+	#la $a0, MenuJuego3
+	#li $a1, 2
+	#li $a2, 42
+	#jal dibujarString
 
 	jr $ra
 
