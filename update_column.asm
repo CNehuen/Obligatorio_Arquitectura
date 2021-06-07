@@ -25,7 +25,7 @@ update_column:
 			subi $t9,$t9,1
 			lw $t7, ($t8)  #almaceno la info del pixel 
 			sw $zero, ($t8)#limpio el pixel
-			ble $t2, 10, errase_column
+			blt $t2, 10, errase_column
 			sub $t8, $t8, 40  #me muevo hacia atras hacia donde debo pintar la columna
 			sw $t7, ($t8)  # pinto el pixel 1 posicion a la izq de donde esta la columna 
 			addiu $t8,$t8, 40 # me muevo a la posicion de la derecha de la columna
@@ -41,19 +41,21 @@ update_column:
 	beqz $t4, loop_move_columns
 	la $t1, column_coord
 	lb $t2, ($t1)
-	beqz $t2, delete_first_column
-	ble $t2, 10, create_column_right
+	blt $t2,0, delete_first_column
+	blt $t2, 10, create_column_right
 
 	j end_update_column
 	
 	delete_first_column: #si se borro por completo la columna de la izq, la segunda pasa  a ser la de la izq y la de la derecha pasa a ser la segunda
+		la $t1, column_coord
+		lb $t3, 1($t1)
 		sb $t3, ($t1)
 		li $t2, 127
 		sb $t2, 1($t1)
 		j end_update_column
 		
 	create_column_right:  
-		li $t0, 117
+		li $t0, 118
 		addu $a0, $t0, $t2
 		jal  create_column
 		j end_update_column
