@@ -5,6 +5,7 @@ flappy_new_game:
 	#Coordenadas del string del puntaje : [x($a1) = 47 ; y($a2) = 2]
 	#Coordnadas iniciales del pajaro: [x($a1) = ; y($a2) = ]
 	#Cantidad maxima de columnas en el display = 2
+	#Ancho de las columnas = 10
 	
 	#-----PROLOGO-----#	
 	#Guardo $ra en sp para no perderlo
@@ -30,3 +31,9 @@ flappy_new_game:
 	addi $sp, $sp, 4 
 	
 	jr $ra
+	
+
+
+
+
+	

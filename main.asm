@@ -8,6 +8,8 @@
 .globl String8x8 
 .globl Int8x8 
 .globl font8x8
+.globl column_coord
+.globl column_space
 .data 
 .align 2
 img: .space 32768 #espacio de memoria para la imagen 
@@ -24,6 +26,8 @@ StringFlappy: .asciiz "FLAPPY BIRD"
 MenuJuego1: .asciiz "NUEVO JUEGO"
 MenuJuego2: .asciiz "RANKING"
 MenuJuego3: .asciiz "SALIR"
+column_coord: .space 2  #coordenadas en x de cada una de las columnas
+column_space: .space 3 #corrdenadas en y de los espacios de las columnas. la 3ra posicion es para la columna que se crea mientas se borra la de las a  la izq
 .eqv keyboard_cmd 0xFFFF0012
 .eqv keyboard_pressed 0xFFFF0014
 .text
