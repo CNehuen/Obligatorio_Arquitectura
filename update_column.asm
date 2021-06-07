@@ -25,14 +25,13 @@ update_column:
 			sw $zero, ($t8)#limpio el pixel
 			blt $t2, 10, errase_column
 			sub $t6, $t8, 44  #me muevo hacia atras hacia donde debo pintar la columna
-			blt $t6,
 			sw $t7, ($t8)  # pinto el pixel 1 posicion a la izq de donde esta la columna 
 			addiu $t8,$t8, 44 # me muevo a la posicion de la derecha de la columna
 			errase_column:
 			addiu $t8,$t8, 512 # me muevo a la fila de abajo
 			j loop_move_column
 			
-	end_move_columns
+	end_move_columns:
 	beqz $t4, loop_move_columns
 	subi $t3, $t3, 1
 	subi $t2, $t2, 1
