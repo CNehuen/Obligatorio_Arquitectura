@@ -15,6 +15,7 @@ update_column:
 	beqz $t3, create_first_columns
 	#Desplazo la hilera de la derecha de las columnas hacia la izquierda de la columna
 	loop_move_columns:
+		la $t0, img
 		addiu $t4, $t4,1
 		li $t9, 64
 		mulu $t5, $t2, 4
@@ -40,19 +41,21 @@ update_column:
 	beqz $t4, loop_move_columns
 	la $t1, column_coord
 	lb $t2, ($t1)
-	beqz $t2, delete_first_column
+	blt $t2,0, delete_first_column
 	blt $t2, 10, create_column_right
 
 	j end_update_column
 	
 	delete_first_column: #si se borro por completo la columna de la izq, la segunda pasa  a ser la de la izq y la de la derecha pasa a ser la segunda
+		la $t1, column_coord
+		lb $t3, 1($t1)
 		sb $t3, ($t1)
 		li $t2, 127
 		sb $t2, 1($t1)
 		j end_update_column
 		
 	create_column_right:  
-		li $t0, 117
+		li $t0, 118
 		addu $a0, $t0, $t2
 		jal  create_column
 		j end_update_column
