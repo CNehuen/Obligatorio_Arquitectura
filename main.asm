@@ -26,7 +26,7 @@ StringFlappy: .asciiz "FLAPPY BIRD"
 MenuJuego1: .asciiz "NUEVO JUEGO"
 MenuJuego2: .asciiz "RANKING"
 MenuJuego3: .asciiz "SALIR"
-column_coord: .space 2  #coordenadas en x de cada una de las columnas
+column_coord: .space 3  #coordenadas en x de cada una de las columnas. la 3ra coordenada es un auxiliar
 column_heigh: .space 3 #corrdenadas en y de los espacios de las columnas. la 3ra posicion es para la columna que se crea mientas se borra la de las a  la izq
 .eqv keyboard_cmd 0xFFFF0012
 .eqv keyboard_pressed 0xFFFF0014
@@ -38,22 +38,23 @@ main:
 	#li $a1, 2
 	#li $a2, 2
 	#jal dibujarString
-	la $a0, MenuJuego1
-	li $a1, 2
-	li $a2, 22
-	jal dibujarString
-	la $a0, MenuJuego2
-	li $a1, 2
-	li $a2, 32
-	jal dibujarString
-	la $a0, MenuJuego3
-	li $a1, 2
-	li $a2, 42
-	jal dibujarString
 	
-	jal MenuElegirJuego #menu de seleccion de juego
-	beqz $v0,inicio_flappy_bird
-	beq $v0, 1, inicio_otro_juego
+	#la $a0, MenuJuego1
+	#li $a1, 2
+	#li $a2, 22
+	#jal dibujarString
+	#la $a0, MenuJuego2
+	#li $a1, 2
+	#li $a2, 32
+	#jal dibujarString
+	#la $a0, MenuJuego3
+	#li $a1, 2
+	#li $a2, 42
+	#jal dibujarString
+	
+	#jal MenuElegirJuego #menu de seleccion de juego
+	#beqz $v0,inicio_flappy_bird
+	#beq $v0, 1, inicio_otro_juego
 	
 	inicio_flappy_bird:
 		jal flappy_bird

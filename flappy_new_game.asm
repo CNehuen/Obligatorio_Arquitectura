@@ -12,7 +12,12 @@ flappy_new_game:
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
 	
-	jal clean_screen
+	la $t0, column_coord
+	sb $zero, ($t0)
+	sb $zero, 1($t0)
+	li $t1, 10
+	sb $t1, 2($t0)
+	#jal clean_screen
 	loop_flappy_game:
 		jal update_column #actualizo columnas y las creo si es necesario
 		#jal update_bird	# actualizo la posicion del pajaro y verifico si choca contra la columna

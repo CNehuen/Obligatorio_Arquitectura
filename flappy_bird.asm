@@ -24,7 +24,8 @@ flappy_bird:
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
 	
-	jal clean_screen
+	#jal clean_screen
+	jal flappy_new_game
 	
 	
 	#-----EPILOGO-----#
