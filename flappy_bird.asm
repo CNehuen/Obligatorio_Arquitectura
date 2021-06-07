@@ -12,16 +12,20 @@
 .text
 
 flappy_bird:
+	#Se muestra el menu de la siguiente forma:
+	# Titulo: FLAPPY BIRD
+	#Opciones de menu:
+	#	NUEVO JUEGO: comienza nueva partida
+	#	RANKING: visualiza las mejores posicions del ranking
+	#	SALIR: retorna al menu de seleccion de juego
 	
 	#-----PROLOGO-----#
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
 	
-	la $a0, Int8x8
-	li $a1, 47
-	li $a2,2
-	jal dibujarString
+	jal clean_screen
+	
 	
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	

@@ -9,6 +9,7 @@
 .globl Int8x8 
 .globl font8x8
 .data 
+.align 2
 img: .space 32768 #espacio de memoria para la imagen 
 font8x8: .space 8 
 #La imagen se compone de rectangulos de n*m bits
