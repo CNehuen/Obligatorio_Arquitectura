@@ -15,6 +15,7 @@ update_column:
 	beqz $t3, create_first_columns
 	#Desplazo la hilera de la derecha de las columnas hacia la izquierda de la columna
 	loop_move_columns:
+		la $t0, img
 		addiu $t4, $t4,1
 		li $t9, 64
 		mulu $t5, $t2, 4
@@ -24,7 +25,7 @@ update_column:
 			subi $t9,$t9,1
 			lw $t7, ($t8)  #almaceno la info del pixel 
 			sw $zero, ($t8)#limpio el pixel
-			blt $t2, 10, errase_column
+			ble $t2, 10, errase_column
 			sub $t8, $t8, 40  #me muevo hacia atras hacia donde debo pintar la columna
 			sw $t7, ($t8)  # pinto el pixel 1 posicion a la izq de donde esta la columna 
 			addiu $t8,$t8, 40 # me muevo a la posicion de la derecha de la columna
@@ -41,7 +42,7 @@ update_column:
 	la $t1, column_coord
 	lb $t2, ($t1)
 	beqz $t2, delete_first_column
-	blt $t2, 10, create_column_right
+	ble $t2, 10, create_column_right
 
 	j end_update_column
 	
