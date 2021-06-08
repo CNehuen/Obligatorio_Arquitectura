@@ -20,7 +20,7 @@ font8x8: .space 8
 #El byte LSB para el canal B, el siguiente para el G, el siguiente para el R, y el MSB se desperdicia
 String8x8: .space 17 #Para los strings 
 .align 2
-Int8x8: .asciiz "0000" #Para dibujar los numeros
+Int8x8: .asciiz "1111" #Para dibujar los numeros
 MenuPrincipal: .asciiz "MENU PRINCIPAL"
 StringOtroJuego: .asciiz "OTRO JUEGO"
 StringFlappy: .asciiz "FLAPPY BIRD"
