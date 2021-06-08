@@ -52,6 +52,13 @@ update_column:
 		sb $t3, ($t1)
 		li $t2, 127
 		sb $t2, 1($t1)
+		la $t1, column_heigh
+		lb $t2,1($t1)
+		sb $t2, ($t1)
+		lb $t2,2($t1)
+		sb $t2, 1($t1)
+		sb $zero, 2($t1)
+		
 		j end_update_column
 		
 	create_column_right:  
@@ -128,6 +135,7 @@ create_column:
 	lb $t9, 2($t1)
 	beqz $t9, get_random_heigh		#altura aleatoria de la columna superior
 	continue_create_colum:
+	sb $t9, 2($t1)
 	li $a1, 0
 	move $a2, $t9
 	li $a3, 0x00ffffff
@@ -140,7 +148,17 @@ create_column:
 	
 	get_random_heigh:
 		#creo la altura aleatoria de la columna superior y la almaceno
-		li $t9, 18
+		la $t6, pseudorandom_values
+		lb $t9, ($t6)
+		addi $t9,$t9,7
+		bgt $t9,12, get_circular_pos
+		j get_circular_value
+		get_circular_pos:
+		subiu $t9,$t9,12
+		get_circular_value:
+		sb $t9, ($t6)
+		addu $t6,$t6,$t9			
+		lb $t9, ($t6)
 		j continue_create_colum
 	
 	end_create_column:
