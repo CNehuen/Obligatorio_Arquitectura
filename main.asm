@@ -4,9 +4,7 @@
 
 #Version Desktop
 .globl main
-
 .globl img
- 
 .globl Int8x8 
 .globl bird8x8
 .globl font8x8
@@ -32,7 +30,7 @@ MenuJuego3: .asciiz "SALIR"
 column_coord: .space 3  #coordenadas en x de cada una de las columnas. la 3ra coordenada es un auxiliar
 column_heigh: .space 3 #corrdenadas en y de los espacios de las columnas. la 3ra posicion es para la columna que se crea mientas se borra la de las a  la izq
 pseudorandom_values: .space 13 #13 valores que simulan aleatoriedad y un indice de seleccion:[0]-> indice; [1 -12]->numero 
-
+coordenadaenY: .space 2 
 .eqv keyboard_cmd 0xFFFF0012
 .eqv keyboard_pressed 0xFFFF0014
 .text
