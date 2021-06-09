@@ -1,12 +1,14 @@
 #Obligatorio Sistemas Digitales y Microcontroladores
-#Agustin Abo - 
+#Agustin Abo - 193196
 #Nehuen Carol - 225459
 
 #Version Desktop
 .globl main
+
 .globl img
-.globl String8x8 
+ 
 .globl Int8x8 
+.globl bird8x8
 .globl font8x8
 .globl column_coord
 .globl column_heigh
@@ -18,7 +20,7 @@ font8x8: .space 8
 #La imagen se compone de rectangulos de n*m bits
 #Cada rectangulo tiene asignado un word para la seleccion de colores
 #El byte LSB para el canal B, el siguiente para el G, el siguiente para el R, y el MSB se desperdicia
-String8x8: .space 17 #Para los strings 
+bird8x8: .asciiz "p"  
 .align 2
 Int8x8: .asciiz "0000" #Para dibujar los numeros
 MenuPrincipal: .asciiz "MENU PRINCIPAL"
