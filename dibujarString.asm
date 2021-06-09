@@ -12,7 +12,7 @@
 
 dibujarString:
 	#Max caracteres por linea : 14
-	#$a0 -> string para dibujar
+	#$a0 -> string para dibujar #
 	#$a1 -> coordenada X del String en la pantalla
 	#$a2 -> coordenada Y del String en la pantalla
 	#$a3 -> color?

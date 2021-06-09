@@ -1,5 +1,7 @@
 .globl getFont8x8
 
+
+
 getFont8x8: 
 	#a0 -> char que debe devolver en formato font8x8 para dibujar en el display
 	la $t0, font8x8
@@ -41,6 +43,7 @@ getFont8x8:
 	beq $a0, '7', devuelvo7
 	beq $a0, '8', devuelvo8
 	beq $a0, '9', devuelvo9
+	beq $a0, 'p', devuelvoPajaro
 	j fin 
 
 devuelvoEspacio:	
@@ -766,6 +769,25 @@ devuelvo9:
       li $t1, 0x00 
       sb $t1 , 7($t0)
       j fin 
+
+devuelvoPajaro: 	li $t1, 0x1C 
+      				sb $t1 , ($t0)
+      				li $t1, 0x62 
+      				sb $t1 , 1($t0)
+      				li $t1, 0x85
+      				sb $t1 , 2($t0)
+      				li $t1, 0x85 
+      				sb $t1 , 3($t0)
+      				li $t1, 0x81 
+      				sb $t1 , 4($t0)
+      				li $t1, 0x4E 
+      				sb $t1 , 5($t0)
+      				li $t1, 0x51 
+      				sb $t1 , 6($t0)
+      				li $t1, 0x7E 
+      				sb $t1 , 7($t0)
+      j fin
+
 
 	  fin:
       jr $ra 
