@@ -7,50 +7,66 @@ update_column:
 	
 	
 	
-	la $t1, column_coord #coordenadas en x de cada una de las columnas. la 3ra coordenada es un auxiliar
-	la $t0, img  		#espacio de memoria para la imagen
-	lb $t2, ($t1) 		#en t2 tengo el valor en x de la primera columna
-	lb $t3, 1($t1) 		#en t3 tengo el valor en x de la segunda columna 
-	li $t4, -1  		#variable de seleccion de columna para mover
-	beqz $t3, create_first_columns  #Si la segunda columna es 0, crear  
+	la $t1, column_coord
+	la $t0, img
+	lb $t2, ($t1)
+	lb $t3, 1($t1)
+	li $t4, 2  #variable contador de columna para mover
+	beqz $t3, create_first_columns
 	#Desplazo la hilera de la derecha de las columnas hacia la izquierda de la columna
 	loop_move_columns:
-		la $t0, img 		#espacio de memoria para la imagen
-		addiu $t4, $t4,1 	#Arranca en -1 
-		li $t9, 64			#t9 es 64 #128x64 
-		mulu $t5, $t2, 4	#Multiplico t2 por 4 guardo en t5 
-		addu $t8, $t0, $t5  #me coloco en la posicion de la derecha de la primra columna
+		la $t0, img
+		subiu $t4, $t4,1
+		li $t9, 64
+		mulu $t5, $t2, 4
+		addu $t8, $t0, $t5  # me coloco en la pisicion de la derecha de la primra columna
 		loop_move_column:
-			beqz $t9, end_move_columns 	# si t9 es 0 voy a end
-			subi $t9,$t9,1					#resto 1 
-			lw $t7, ($t8)	#Registro P.A  #almaceno la info del pixel 
-			sw $zero, ($t8)				#limpio el pixel
+			beqz $t9, end_move_columns
+			subi $t9,$t9,1
+			sw $zero, ($t8)#limpio el pixel
 			blt $t2, 10, errase_column
 			sub $t8, $t8, 40  #me muevo hacia atras hacia donde debo pintar la columna
-			sw $t7, ($t8)  # pinto el pixel 1 posicion a la izq de donde esta la columna 
-			addiu $t8,$t8, 40 # me muevo a la posicion de la derecha de la columna
+			#verifico si debo pintar negro o blanco
+			#t3,t5,t6,t7 libres
+			la $t3, column_heigh
+			addiu $t3,$t3,1
+			subu $t3,$t3,$t4 #calculo la coordenada en Y donde estoy parado
+			lb $t6, ($t3)
+			li $t5, 63
+			sub $t5, $t5,$t9  #posicion actual creciente
+			blt $t5, $t6, loop_move_white
+			addiu $t6,$t6,20
+			blt $t5, $t6, loop_move_black
+			loop_move_white:
+				li $t7, 0x00ffffff
+				sw $t7, ($t8)  # pinto el pixel 1 posicion a la izq de donde esta la columna, de blanco
+				addiu $t8,$t8, 40 # me muevo a la posicion de la derecha de la columna
+				j errase_column
+			loop_move_black:
+				sw $zero, ($t8)  # pinto el pixel 1 posicion a la izq de donde esta la columna, de negro		
+				addiu $t8,$t8, 40 # me muevo a la posicion de la derecha de la columna
 			errase_column:
 			addiu $t8,$t8, 512 # me muevo a la fila de abajo
 			j loop_move_column
 			
 	end_move_columns:
-	subi $t2, $t2, 1   #En el ejemplo pasa a valer 11
-	sb $t2, ($t1)	  # quedaria el 11 en la primera de las 3 posiciones del vector
-	addiu $t1,$t1,1  
-	lb $t2, ($t1)		#Lees la posicion en x de la segunda columna 
-	beqz $t4, loop_move_columns #Contador de cuantas columnas quedan por mover 
-	la $t1, column_coord	
+	subi $t2, $t2, 1
+	sb $t2, ($t1)
+	addiu $t1,$t1,1
 	lb $t2, ($t1)
-	blt $t2,0, delete_first_column #borre la primera columna 
+	beq $t4,1, loop_move_columns
+	la $t1, column_coord
+	lb $t2, ($t1)
+	blt $t2,0, delete_first_column
 	blt $t2, 10, create_column_right
 
 	j end_update_column
 	
 	delete_first_column: #si se borro por completo la columna de la izq, la segunda pasa  a ser la de la izq y la de la derecha pasa a ser la segunda
-		la $t1, column_coord  #Acomodar el vector de posiciones en x
-		lb $t3, 1($t1)	#Despues que borro la primera 
-		sb $t3, ($t1)  #Paso mi segunda columna a que sea mi primera
-		li $t2, 127			
+		la $t1, column_coord
+		lb $t3, 1($t1)
+		sb $t3, ($t1)
+		li $t2, 127
 		sb $t2, 1($t1)
 		la $t1, column_heigh
 		lb $t2,1($t1)
@@ -58,7 +74,6 @@ update_column:
 		lb $t2,2($t1)
 		sb $t2, 1($t1)
 		sb $zero, 2($t1)
-		
 		j end_update_column
 		
 	create_column_right:  
@@ -69,7 +84,7 @@ update_column:
 
 	create_first_columns:
 		beqz $t2, create_first_column
-		li $t4, 0
+		li $t4, 1
 		ble $t2, 73, create_second_column
 		j loop_move_columns
 		
@@ -89,9 +104,14 @@ update_column:
 			sb $t5, ($t1)
 			li $t5, 10
 			sb $t5, 2($t1)
+			la $t1, column_heigh
+			lb $t5,2($t1)
+			sb $t5,1($t1)
+			sb $zero,2($t1)
 			j end_update_column
 		
 		create_second_column:
+			la $t1, column_coord
 			lb $t5, 2($t1)
 			addi $t6, $t5, 117
 			move $a0, $t6
@@ -107,6 +127,13 @@ update_column:
 			sb $t5, 1($t1)
 			li $t5, 10
 			sb $t5, 2($t1)
+			la $t1, column_heigh
+			lb $t5,1($t1)
+			sb $t5,($t1)
+			lb $t5,2($t1)
+			sb $t5,1($t1)
+			sb $zero,2($t1)
+			la $t1, column_coord
 			j loop_move_columns
 	
 	set_second_column:
