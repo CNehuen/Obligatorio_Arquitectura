@@ -11,7 +11,10 @@ flappy_new_game:
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
-	
+	la $t0, coordenadaenY
+	li $t1, 20
+	sb $t1,($t0) 
+	sb $zero, 1($t0)	
 	la $t0, column_coord
 	sb $zero, ($t0)
 	sb $zero, 1($t0)

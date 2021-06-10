@@ -11,6 +11,8 @@
 .globl column_coord
 .globl column_heigh
 .globl pseudorandom_values
+.globl limpiarPajaro
+.globl coordenadaenY
 .data 
 .align 2
 img: .space 32768 #espacio de memoria para la imagen 
@@ -31,6 +33,7 @@ column_coord: .space 3  #coordenadas en x de cada una de las columnas. la 3ra co
 column_heigh: .space 3 #corrdenadas en y de los espacios de las columnas. la 3ra posicion es para la columna que se crea mientas se borra la de las a  la izq
 pseudorandom_values: .space 13 #13 valores que simulan aleatoriedad y un indice de seleccion:[0]-> indice; [1 -12]->numero 
 coordenadaenY: .space 2 
+limpiarPajaro: .asciiz " "
 .eqv keyboard_cmd 0xFFFF0012
 .eqv keyboard_pressed 0xFFFF0014
 .text
