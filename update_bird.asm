@@ -31,25 +31,20 @@ update_bird:
 					sub $t2, $t2, 1 	#Sube 1 pixel 
 					la $a0, bird8x8     #Dibuja el pajaro
 					li $a1, 20 			#Posicion en x
-					li $a2, $t2			#Nueva posicion en y duda 
+					li $a2, $t2			#Nueva posicion en y 19 
 					sub $t3, $t3, 1     #Vuelvo mi boton a 0   
-					sw $t3, 1($t1)  	#Lo guardo
-					sub $t2, $t2, 1   	#Pasa a ser 19 
+					sw $t3, 1($t1)  	#Lo guardo					   
 					sw $t2, ($t1)    	#Guardo mi nueva posicion actual 
 					addi $t8, $t8, 1  	#Sumo uno al contador
 					jal dibujarString  	#Dibujo el pajaro 
-					la $t1, coordenadaenY
-					lb $t2, ($t1)
-					lb $t3, 1($t1)      #Leo mis nuevos datos
-					#Si no apretan el boton de nuevo tengo que terminar 
-					#el movimiento solo subiendo otro pixel
-					##LEO NUEVAMENTE
-					beq $t3, 1, SeguirSubiendo 
-					beq $t3, 0, Subo
+					la $t1, coordenadaenY #Leo mis nuevos datos
+					lb $t2, ($t1)         ##LEO NUEVAMENTE
+					lb $t3, 1($t1)      				
+					beq $t3, 1, SeguirSubiendo #Me queda subir un pixel mas 2 mas
+					beq $t3, 0, Subo			#Si t3 es 0 solo me queda subir un pixel
 					
 					Subo:
-					li $t8, 2
-					bne $t8, 4, SubiendoPajaro   
+					bne $t8, 2, SubiendoPajaro   
 					j movimientoPajaro
 					
 					SeguirSubiendo:
