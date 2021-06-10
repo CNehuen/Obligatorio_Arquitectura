@@ -24,10 +24,15 @@ flappy_bird:
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
 	
-	#jal clean_screen
-	jal flappy_new_game
+	jal clean_screen
+	li $a0, 1
+	jal menu #menu de juego
+	beqz $v0, nueva_partida 
+	j salir_flappy
+	nueva_partida:
+		jal flappy_new_game
 	
-	
+	salir_flappy:
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
 	addi $sp, $sp, 4 
