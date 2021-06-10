@@ -14,6 +14,7 @@
 .globl limpiarPajaro
 .globl coordenadaenY
 .globl scores
+
 .data 
 .align 2
 img: .space 32768 #espacio de memoria para la imagen 
