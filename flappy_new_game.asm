@@ -11,7 +11,10 @@ flappy_new_game:
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
-	
+	la $t0, coordenadaenY
+	li $t1, 20
+	sb $t1,($t0) 
+	sb $zero, 1($t0)	
 	la $t0, column_coord
 	sb $zero, ($t0)
 	sb $zero, 1($t0)
@@ -55,8 +58,8 @@ flappy_new_game:
 	sb $t1, 12($t0)	
 	#jal clean_screen
 	loop_flappy_game:
-		jal update_column #actualizo columnas y las creo si es necesario
-		#jal update_bird	# actualizo la posicion del pajaro y verifico si choca contra la columna
+		#jal update_column #actualizo columnas y las creo si es necesario
+		jal update_bird	# actualizo la posicion del pajaro y verifico si choca contra la columna
 						# En caso de que choque, retorno por parametro un booleano True para notificar que se perdio y terminar la partida
 		beq $v0, 1, end_flappy_game
 		jal update_score
