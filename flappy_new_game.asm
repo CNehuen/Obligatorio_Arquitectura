@@ -56,12 +56,12 @@ flappy_new_game:
 	sb $t1, 11($t0)
 	li $t1, 36
 	sb $t1, 12($t0)	
-	#jal clean_screen
+	jal clean_screen
 	loop_flappy_game:
-		#jal update_column #actualizo columnas y las creo si es necesario
-		jal update_bird	# actualizo la posicion del pajaro y verifico si choca contra la columna
+		jal update_column #actualizo columnas y las creo si es necesario
+		#jal update_bird	# actualizo la posicion del pajaro y verifico si choca contra la columna
 						# En caso de que choque, retorno por parametro un booleano True para notificar que se perdio y terminar la partida
-		beq $v0, 1, end_flappy_game
+		#beq $v0, 1, end_flappy_game
 		jal update_score
 		#jal timer_background_refresh
 		j loop_flappy_game

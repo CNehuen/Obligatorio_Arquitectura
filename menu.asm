@@ -14,13 +14,12 @@ menu:
 	#		0 -> Menu principal de seleccion de juego
 	#		1-> Menu de juego
 	
+	
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
 	
-	move $t8, $zero
 	beqz $a0, menu_principal
-		li $t9,3  #Cantidad de strings seleccionables
 		la $a0, StringFlappy
 		li $a1, 2
 		li $a2, 2
@@ -37,10 +36,11 @@ menu:
 		li $a1, 2
 		li $a2, 42
 		jal dibujarString
+		li $t9,3  #Cantidad de strings seleccionables
+		move $t8, $zero
 		j subrayar_string
-	
+		
 	menu_principal:
-		li $t9,2  #Cantidad de strings seleccionables
 		la $a0, MenuPrincipal
 		li $a1, 2
 		li $a2, 2
@@ -51,33 +51,37 @@ menu:
 		jal dibujarString
 		la $a0, StringOtroJuego
 		li $a1, 2
-		li $a2, 42
+		li $a2, 32
 		jal dibujarString
-	
+		li $t9,2  #Cantidad de strings seleccionables
+		move $t8, $zero
 	
 	subrayar_string:
-		mulu $a0, $t8, 10  
-		addiu $a0, $a0, 30
-		li $a1, 2
+		mulu $a1, $t8, 10  
+		addiu $a1, $a1, 30
+		li $a0, 2
 		li $a2, 0x00ffffff
 		jal dibujar_subrayar #subrayo el primer item
-		subi $t8, $t8, 1
+		#subi $t8, $t8, 1
 		loop_seleccion_menu:
-		jal botones_seleccion
-		beqz $v0, boton_enter
+		#jal botones_seleccion
+		#beqz $v0, boton_enter
 			#presiono la tecla flecha
-			mulu $a0, $t8, 10  
-			addiu $a0, $a0, 30
-			li $a1, 2
+			li $v0, 5
+			syscall
+			beq $v0, 5, boton_enter
+			mulu $a1, $t8, 10  
+			addiu $a1, $a1, 30
+			li $a0, 2
 			li $a2, 0x00000000
 			jal dibujar_subrayar #borro el subraye anterior
 			addiu $t8, $t8, 1
 			beq $t8, $t9, renuevo_t8
 			sigo_subrayar:
 			#calculo posicion Y de la linea a subrayar : y= 22(pos iniical del primer string) + t8*deltah(separacion entre strings) + 8(altura del string)
-			mulu $a0, $t8, 10  
-			addiu $a0, $a0, 30
-			li $a1, 2
+			mulu $a1, $t8, 10  
+			addiu $a1, $a1, 30
+			li $a0, 2
 			li $a2, 0x00ffffff
 			jal dibujar_subrayar #subrayo el item de menu actual
 			j loop_seleccion_menu
