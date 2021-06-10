@@ -13,6 +13,7 @@
 .globl pseudorandom_values
 .globl limpiarPajaro
 .globl coordenadaenY
+.globl scores
 .data 
 .align 2
 img: .space 32768 #espacio de memoria para la imagen 
@@ -22,12 +23,13 @@ font8x8: .space 8
 #El byte LSB para el canal B, el siguiente para el G, el siguiente para el R, y el MSB se desperdicia
 bird8x8: .asciiz "p"  
 .align 2
-Int8x8: .asciiz "1111" #Para dibujar los numeros
+Int8x8: .asciiz "0000" #Para dibujar los numeros
 column_coord: .space 3  #coordenadas en x de cada una de las columnas. la 3ra coordenada es un auxiliar
 column_heigh: .space 3 #corrdenadas en y de los espacios de las columnas. la 3ra posicion es para la columna que se crea mientas se borra la de las a  la izq
 pseudorandom_values: .space 13 #13 valores que simulan aleatoriedad y un indice de seleccion:[0]-> indice; [1 -12]->numero 
 coordenadaenY: .space 2 
 limpiarPajaro: .asciiz " "
+scores: .space 1
 .text
 
 
