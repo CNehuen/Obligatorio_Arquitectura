@@ -38,11 +38,15 @@ update_bird:
 									
 					BajarPajaro:				
 					addi $t2, $t2, 1		 #Baja un pixel
-					beq $t2, 54, partidaPerdida  
+					beq $t2, 54, partidaPerdida
+					sigo:   
 					la $a0, bird8x8
 					li $a1, 20 
-					move $a2, $t2 				
-					sub $t3, $t3, 1
+					move $a2, $t2 													
+					sub $t3, $t3, 1 					
+					bgez $t3, ContinuarBajando	
+					addi $t3, $t3, 1
+					ContinuarBajando:				
 					sb $t3, 1($t1)					 
 					sb $t2, ($t1)							
 					jal dibujarString		#Dibujo el pajaro
@@ -52,13 +56,13 @@ update_bird:
 					
 				
 			
-			partidaPerdida: 	
-					li $v0, 1
+			partidaPerdida: 
+			sub $t2, $t2, 1 	
+			j sigo 
+			#		li $v0, 1
 					
 						
-			finMovimientoPajaro:		
-								
-															
+			finMovimientoPajaro:																									
 						
 			#-----EPILOGO-----#
     		lw $ra , ($sp) 	
