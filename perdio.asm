@@ -47,6 +47,7 @@ perdio:
 		j RepBusqueda
 		
 		
+		
 		perdioLaPartida: 
 		li $v0, 1
 		j terminarVerificacion
@@ -55,8 +56,14 @@ perdio:
 		Sobrevivio:
 		li $v0, 0
 		
+		 
 		
 		terminarVerificacion:
+		#-----EPILOGO-----#
+    	lw $ra , ($sp) 	
+		addi $sp, $sp, 4 
+		
+		
 		jr $ra 
 		
 		

@@ -23,7 +23,7 @@ flappy_bird:
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
-	
+	gamemenu:
 	jal clean_screen
 	li $a0, 1
 	jal menu #menu de juego
@@ -31,7 +31,7 @@ flappy_bird:
 	j salir_flappy
 	nueva_partida:
 		jal flappy_new_game
-	
+		j gamemenu
 	salir_flappy:
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	

@@ -1,5 +1,6 @@
 .globl flappy_new_game
-
+.eqv control1 0xFFFF0000
+.eqv data1 0xFFFF0004
 flappy_new_game:
 	#Definiciones:
 	#Coordenadas del string del puntaje : [x($a1) = 47 ; y($a2) = 2]
@@ -60,15 +61,38 @@ flappy_new_game:
 	sb $t1, 12($t0)	
 	jal clean_screen
 	loop_flappy_game:
+		la $t1, control1
+		lw $t2, ($t1)
+		andi $t2 , $t2, 0x01
+		beqz $t2, continue_loop
+		la $t1, data1  
+		lw $t2, ($t1) #0x00 00 00 00			
+		bne $t2, ' ', continue_loop
+		la $t0, coordenadaenY
+		lb $t1, 1($t0)
+		addi $t1, $t1, 5
+		sb $t1, 1($t0)
+		continue_loop:
 		jal update_column #actualizo columnas y las creo si es necesario
 		jal update_bird	# actualizo la posicion del pajaro y verifico si choca contra la columna
 		jal perdio			# En caso de que choque, retorno por parametro un booleano True para notificar que se perdio y terminar la partida
 		beq $v0, 1, end_flappy_game
 		jal update_score
 		#jal timer_background_refresh
+		li $v0, 32
+		li $a0, 25
+		syscall
 		j loop_flappy_game
 		
 	end_flappy_game:
+		li $v0, 32
+		li $a0, 1500
+		syscall
+		jal clean_screen
+	jal update_score
+	li $v0, 32
+		li $a0, 5000
+		syscall
 	#jal show_your_score  #muestro en pantalla el puntaje obtenido en el juego por X segundos antes de retornar al menu de juego
 	# almaceno el score en el ranking si corresponde
 	

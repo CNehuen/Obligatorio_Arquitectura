@@ -6,13 +6,13 @@ StringFlappy: .asciiz "FLAPPY BIRD"
 MenuJuego1: .asciiz "NUEVO JUEGO"
 MenuJuego2: .asciiz "RANKING"
 MenuJuego3: .asciiz "SALIR"
-.eqv keyboard_cmd 0xFFFF0012
-.eqv keyboard_pressed 0xFFFF0014
+.eqv control 0xFFFF0000
+.eqv data 0xFFFF0004
 .text
 menu:
 	#$a0 -> selector de manu para mostrar
-	#		0 -> Menu principal de seleccion de juego
-	#		1-> Menu de juego
+	#0 -> Menu principal de seleccion de juego
+	#1-> Menu de juego
 	
 	
 	#Guardo $ra en sp para no perderlo
@@ -57,19 +57,21 @@ menu:
 		move $t8, $zero
 	
 	subrayar_string:
-		mulu $a1, $t8, 10  
+		mulu $a1, $t8, 10 	
 		addiu $a1, $a1, 30
 		li $a0, 2
 		li $a2, 0x00ffffff
 		jal dibujar_subrayar #subrayo el primer item
 		#subi $t8, $t8, 1
 		loop_seleccion_menu:
-		#jal botones_seleccion
-		#beqz $v0, boton_enter
-			#presiono la tecla flecha
-			li $v0, 5
-			syscall
-			beq $v0, 5, boton_enter
+			la $t1, control
+			lw $t2, ($t1)
+			andi $t2 , $t2, 0x01
+			beqz $t2, loop_seleccion_menu
+			la $t1, data  
+			lw $t2, ($t1) #0x00 00 00 00			
+			beq $t2, '\n', boton_enter
+			bne $t2, 's', loop_seleccion_menu
 			mulu $a1, $t8, 10  
 			addiu $a1, $a1, 30
 			li $a0, 2
@@ -100,28 +102,7 @@ menu:
 
 
 	
-botones_seleccion:
-	la $t0, keyboard_pressed
-	la $t1, keyboard_cmd
-	li $t2, 0x1
-	sb $t2,($t1)
-	li $v0,0
-	j salgo
-	loop:
-		lbu $t3,($t0)
-		lbu $t4,($t1)
-		beqz $t3, loop
-		beq $t3, 0x11,boton_cero
-		beq $t3, 0x81,boton_tres
-		j loop
-	boton_cero:
-		li $v0,0
-		j salgo
-	boton_tres:
-		li $v0, 1
-		j salgo
-	salgo:
-		jr $ra
+
 	
 dibujar_subrayar:
 	#Funcion que pinta rectangulos horizaontalmente desde la pisicion (x,y), hasta el maximo de caracteres (14)

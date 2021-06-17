@@ -42,7 +42,7 @@ main:
 	
 	inicio_flappy_bird:
 		jal flappy_bird
-		j terminar_consola
+		j main 
 	inicio_otro_juego:
 	
 	terminar_consola:
