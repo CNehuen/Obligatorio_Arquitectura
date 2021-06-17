@@ -22,15 +22,18 @@ update_bird:
 				bgez $t3, SubiendoPajaro  #El boton hace que suba 2 pixeles
 										
 														
-					SubiendoPajaro: 					
+					SubiendoPajaro: 
+					beqz $t2, no_subir					
 					sub $t2, $t2, 1 	#Sube 1 pixel 
+					no_subir:
 					la $a0, bird8x8     #Dibuja el pajaro
 					li $a1, 20 			#Posicion en x
 					move $a2, $t2			#Nueva posicion en y 19 
-					  	
+					  	  	
 					sub $t3, $t3, 1     #Vuelvo mi boton a 0   
 					sb $t3, 1($t1)  	#Lo guardo					   
 					sb $t2, ($t1)    	#Guardo mi nueva posicion actual 
+					
 					jal dibujarString		#Dibujo el pajaro
 					move $v0, $zero  			  						 
 					j finMovimientoPajaro  

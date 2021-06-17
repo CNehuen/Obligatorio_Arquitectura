@@ -33,6 +33,7 @@ flappy_bird:
 		jal flappy_new_game
 		j gamemenu
 	salir_flappy:
+	jal clean_screen
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
 	addi $sp, $sp, 4 

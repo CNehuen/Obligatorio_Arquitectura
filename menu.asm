@@ -4,8 +4,7 @@ MenuPrincipal: .asciiz "MENU PRINCIPAL"
 StringOtroJuego: .asciiz "OTRO JUEGO"
 StringFlappy: .asciiz "FLAPPY BIRD"
 MenuJuego1: .asciiz "NUEVO JUEGO"
-MenuJuego2: .asciiz "RANKING"
-MenuJuego3: .asciiz "SALIR"
+MenuJuego2: .asciiz "SALIR"
 .eqv control 0xFFFF0000
 .eqv data 0xFFFF0004
 .text
@@ -32,11 +31,7 @@ menu:
 		li $a1, 2
 		li $a2, 32
 		jal dibujarString
-		la $a0, MenuJuego3
-		li $a1, 2
-		li $a2, 42
-		jal dibujarString
-		li $t9,3  #Cantidad de strings seleccionables
+		li $t9,2  #Cantidad de strings seleccionables
 		move $t8, $zero
 		j subrayar_string
 		

@@ -90,12 +90,13 @@ flappy_new_game:
 		syscall
 		jal clean_screen
 	jal update_score
+	la $a0, your_score
+		li $a1, 23
+		li $a2, 30
+		jal dibujarString
 	li $v0, 32
 		li $a0, 5000
 		syscall
-	#jal show_your_score  #muestro en pantalla el puntaje obtenido en el juego por X segundos antes de retornar al menu de juego
-	# almaceno el score en el ranking si corresponde
-	
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
 	addi $sp, $sp, 4 

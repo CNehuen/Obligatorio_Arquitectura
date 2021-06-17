@@ -14,7 +14,7 @@
 .globl limpiarPajaro
 .globl coordenadaenY
 .globl scores
-
+.globl your_score
 .data 
 .align 2
 img: .space 32768 #espacio de memoria para la imagen 
@@ -31,11 +31,11 @@ pseudorandom_values: .space 13 #13 valores que simulan aleatoriedad y un indice 
 coordenadaenY: .space 2 
 limpiarPajaro: .asciiz " "
 scores: .space 1
+your_score: .asciiz "TU PUNTAJE"
 .text
-
-
 main:
 	li $a0, 0
+	jal clean_screen
 	jal menu #menu de seleccion de juego
 	beqz $v0,inicio_flappy_bird
 	beq $v0, 1, inicio_otro_juego
