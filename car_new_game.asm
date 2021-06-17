@@ -11,6 +11,40 @@ car_new_game:
 	#Defino 12 valores y la posicion 0 del vector actua de indice
 	#Avanzo como si fuera un array circular y avanzo de a 7 posiciones por vez,
 	#por lo tanto los valores vuelven a repetirse cada 7*12 = 84 repeticiones
+	la $t0, car16x16
+	li $t1, 0x0000
+	sh $t0, ($t1)
+	li $t1, 0x0000
+	sh $t0, 1($t1)
+	li $t1, 0xC000
+	sh $t0, 2($t1)
+	li $t1, 0x9F1F
+	sh $t0, 3($t1)
+	li $t1, 0x9F1F
+	sh $t0, 4($t1)
+	li $t1, 0x8404
+	sh $t0, 5($t1)
+	li $t1, 0xBFF5
+	sh $t0, 6($t1)
+	li $t1, 0xF87F
+	sh $t0, 7($t1)
+	li $t1, 0xF87F
+	sh $t0, 8($t1)
+	li $t1, 0xBFF5
+	sh $t0, 9($t1)
+	li $t1, 0x8404
+	sh $t0, 10($t1)
+	li $t1, 0x9F1F
+	sh $t0, 11($t1)
+	li $t1, 0x9F1F
+	sh $t0, 12($t1)
+	li $t1, 0xC000
+	sh $t0, 13($t1)
+	li $t1, 0x0000
+	sh $t0, 14($t1)
+	li $t1, 0x0000
+	sh $t0, 15($t1)
+	
 	la $t0, pseudorandom_values
 	lb $t1, ($t0)
 	blt $t1,0, start_circular_array2
