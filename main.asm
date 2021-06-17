@@ -15,6 +15,7 @@
 .globl coordenadaenY
 .globl scores
 .globl your_score
+.globl car16x16
 .data 
 .align 2
 img: .space 32768 #espacio de memoria para la imagen 
@@ -33,7 +34,6 @@ limpiarPajaro: .asciiz " "
 scores: .space 1
 your_score: .asciiz "TU PUNTAJE"
 car16x16: .space 32
-car16x16inv: .space 32
 .text
 main:
 	li $a0, 0
