@@ -48,17 +48,17 @@ car_new_game:
 		la $t1, control2
 		lw $t2, ($t1)
 		andi $t2 , $t2, 0x01
-		#beqz $t2, continue_loop2
+		beqz $t2, continue_loop2
 		la $t1, data2
 		lw $t2, ($t1)		
-		#continue_loop2:
+		continue_loop2:
 		jal update_cars 
 		jal update_my_car
 		jal choque
 		beq $v0, 1, end_racing_game
 		jal update_score_2
 		#jal timer_background_refresh
-		li $v0, 32
+	li $v0, 32
 		li $a0, 25
 		syscall
 		j loop_racing_game

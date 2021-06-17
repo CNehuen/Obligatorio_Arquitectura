@@ -1,4 +1,4 @@
-.globl update_bird
+ .globl update_bird
 
 update_bird:
    			#-----PROLOGO-----#
