@@ -5,7 +5,7 @@ update_bird:
 			#-----PROLOGO-----#
 			#Guardo $ra en sp para no perderlo
 			addi $sp, $sp, -4
-			$ra, ($sp)
+			sw $ra, ($sp)
 			
 			movimientoPajaro:
 			la $t1, coordenadaenY #Vector que tiene Yactual y alpha
