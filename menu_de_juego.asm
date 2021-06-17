@@ -35,8 +35,8 @@ menu_de_juego:
 		beq $s0, 2, juego_car
 			jal flappy_new_game
 			j gamemenu
-			juego_car:
-			jal car_new_game
+			 juego_car:
+			 jal car_new_game
 			j gamemenu
 	salir_juego:
 	jal clean_screen
