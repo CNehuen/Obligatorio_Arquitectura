@@ -1,6 +1,6 @@
 .globl update_score
 
-update_score:
+ update_score:
 	#Coordenadas del string del puntaje : [x($a1) = 47 ; y($a2) = 2]
 	#-----PROLOGO-----#	
 	#Guardo $ra en sp para no perderlo
@@ -20,7 +20,7 @@ update_score:
 	li $a1, 47
 	li $a2, 2
 	jal dibujarString
-	j end_update_score
+ j end_update_score
 	aumento_score:
 		la $t2, scores
 		lb $t3, ($t2)
@@ -36,7 +36,7 @@ update_score:
 	jr $ra
 
 
-intToString:
+ intToString:
 	#a0 -> direccion de Int8x8
 	#a1 -> int a convertir
 	li $t1, 4
@@ -52,7 +52,7 @@ intToString:
 		add $t3, $a0, $t1
 		addi $t2, $t2, 48 # convierto en numero al codigo ascii del numero
 		sb $t2, ($t3)
-		j loop_converter
+      j loop_converter
 	end_converter:
 	jr $ra
 	

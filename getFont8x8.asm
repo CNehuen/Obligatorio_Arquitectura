@@ -770,19 +770,19 @@ devuelvo9:
       sb $t1 , 7($t0)
       j fin 
 
-devuelvoPajaro: 	li $t1, 0x1C 
+devuelvoPajaro: 	li $t1, 0x38 
       				sb $t1 , ($t0)
-      				li $t1, 0x62 
+      				li $t1, 0x46 
       				sb $t1 , 1($t0)
-      				li $t1, 0x85
+      				li $t1, 0xA1
       				sb $t1 , 2($t0)
-      				li $t1, 0x85 
+      				li $t1, 0xA1 
       				sb $t1 , 3($t0)
       				li $t1, 0x81 
       				sb $t1 , 4($t0)
-      				li $t1, 0x4E 
+      				li $t1, 0x72 
       				sb $t1 , 5($t0)
-      				li $t1, 0x51 
+      				li $t1, 0x8A 
       				sb $t1 , 6($t0)
       				li $t1, 0x7E 
       				sb $t1 , 7($t0)
