@@ -12,6 +12,7 @@
 .globl column_heigh
 .globl pseudorandom_values
 .globl limpiarPajaro
+.globl limpiarAuto
 .globl coordenadaenY
 .globl scores
 .globl your_score
@@ -31,6 +32,7 @@ column_heigh: .space 3 #corrdenadas en y de los espacios de las columnas. la 3ra
 pseudorandom_values: .space 13 #13 valores que simulan aleatoriedad y un indice de seleccion:[0]-> indice; [1 -12]->numero 
 coordenadaenY: .space 2 
 limpiarPajaro: .asciiz " "
+limpiarAuto: .asciiz "  "
 scores: .space 1
 your_score: .asciiz "TU PUNTAJE"
 car16x16: .space 32

@@ -70,7 +70,7 @@ flappy_new_game:
 		bne $t2, ' ', continue_loop
 		la $t0, coordenadaenY
 		lb $t1, 1($t0)
-		addi $t1, $t1, 5
+		addi $t1, $t1, 5 
 		sb $t1, 1($t0)
 		continue_loop:
 		jal update_column #actualizo columnas y las creo si es necesario
