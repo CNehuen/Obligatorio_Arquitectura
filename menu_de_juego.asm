@@ -1,4 +1,4 @@
-.globl flappy_bird
+.globl menu_de_juego
 #Considerciones generales
 # tamaño del bicho  -> 8x8
 # tamaño del espacio entre colunas -> 20
@@ -11,13 +11,14 @@
 
 .text
 
-flappy_bird:
+menu_de_juego:
 	#Se muestra el menu de la siguiente forma:
-	# Titulo: FLAPPY BIRD
+	# Titulo: 
 	#Opciones de menu:
 	#	NUEVO JUEGO: comienza nueva partida
-	#	RANKING: visualiza las mejores posicions del ranking
 	#	SALIR: retorna al menu de seleccion de juego
+	#Parametros:
+	# a0-> el juego: 0 = FLAPPY BIRD //// 1 = CAR RACING
 	
 	#-----PROLOGO-----#
 	#Guardo $ra en sp para no perderlo
@@ -25,14 +26,19 @@ flappy_bird:
 	sw $ra, ($sp)
 	gamemenu:
 	jal clean_screen
-	li $a0, 1
+	addi $a0,$a0, 1
+	move $s0, $a0
 	jal menu #menu de juego
 	beqz $v0, nueva_partida 
-	j salir_flappy
+	j salir_juego
 	nueva_partida:
-		jal flappy_new_game
-		j gamemenu
-	salir_flappy:
+		beq $s0, 2, juego_car
+			jal flappy_new_game
+			j gamemenu
+			juego_car:
+			jal car_new_game
+			j gamemenu
+	salir_juego:
 	jal clean_screen
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
