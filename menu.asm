@@ -1,11 +1,10 @@
 .globl menu
 .data
 MenuPrincipal: .asciiz "MENU PRINCIPAL"
-StringOtroJuego: .asciiz "OTRO JUEGO"
+StringRacing: .asciiz "CAR RACING"
 StringFlappy: .asciiz "FLAPPY BIRD"
 MenuJuego1: .asciiz "NUEVO JUEGO"
-MenuJuego2: .asciiz "RANKING"
-MenuJuego3: .asciiz "SALIR"
+MenuJuego2: .asciiz "SALIR"
 .eqv control 0xFFFF0000
 .eqv data 0xFFFF0004
 .text
@@ -20,6 +19,7 @@ menu:
 	sw $ra, ($sp)
 	
 	beqz $a0, menu_principal
+	beq $a0, 2, car_racing_menu
 		la $a0, StringFlappy
 		li $a1, 2
 		li $a2, 2
@@ -32,11 +32,7 @@ menu:
 		li $a1, 2
 		li $a2, 32
 		jal dibujarString
-		la $a0, MenuJuego3
-		li $a1, 2
-		li $a2, 42
-		jal dibujarString
-		li $t9,3  #Cantidad de strings seleccionables
+		li $t9,2  #Cantidad de strings seleccionables
 		move $t8, $zero
 		j subrayar_string
 		
@@ -49,13 +45,31 @@ menu:
 		li $a1, 2
 		li $a2, 22
 		jal dibujarString
-		la $a0, StringOtroJuego
+		la $a0, StringRacing
 		li $a1, 2
 		li $a2, 32
 		jal dibujarString
 		li $t9,2  #Cantidad de strings seleccionables
 		move $t8, $zero
-	
+		jal subrayar_string
+		
+	car_racing_menu:
+		la $a0, StringRacing
+		li $a1, 2
+		li $a2, 2
+		jal dibujarString
+		la $a0, MenuJuego1
+		li $a1, 2
+		li $a2, 22
+		jal dibujarString
+		la $a0, MenuJuego2
+		li $a1, 2
+		li $a2, 32
+		jal dibujarString
+		li $t9,2  #Cantidad de strings seleccionables
+		move $t8, $zero
+		j subrayar_string
+		
 	subrayar_string:
 		mulu $a1, $t8, 10 	
 		addiu $a1, $a1, 30
