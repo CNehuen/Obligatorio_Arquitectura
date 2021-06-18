@@ -10,7 +10,7 @@ update_score:
 	la $t0, column_coord
 	lb $t1, ($t0)
 	la $t2, scores
-	lb $t3, ($t2)
+	lw $t3, ($t2)
 	beq $t1, 30, aumento_score 
 	convertir_score:
 	#Debo convertir el int de score a string
@@ -23,9 +23,9 @@ update_score:
 	j end_update_score
 	aumento_score:
 		la $t2, scores
-		lb $t3, ($t2)
+		lw $t3, ($t2)
 		addi $t3, $t3, 1
-		sb $t3, ($t2)
+		sw $t3, ($t2)
 		j convertir_score
 
 	end_update_score:

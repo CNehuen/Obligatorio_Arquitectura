@@ -19,6 +19,7 @@
 .globl car16x12
 .globl car16x12Inv
 .globl matriz_posiciones_autos
+.globl coordenadaenYauto
 .data 
 .align 2
 img: .space 32768 #espacio de memoria para la imagen 
@@ -35,14 +36,15 @@ pseudorandom_values: .space 13 #13 valores que simulan aleatoriedad y un indice 
 coordenadaenY: .space 2 
 limpiarPajaro: .asciiz " "
 limpiarAuto: .asciiz "  "
-scores: .space 1
+.align 2
+scores: .space 4
 your_score: .asciiz "TU PUNTAJE"
 .align 1
 car16x12: .space 24
 .align 1
 car16x12Inv: .space 24
-matriz_posiciones_autos: .space 18
-
+matriz_posiciones_autos: .space 12
+coordenadaenYauto: .space 1
 .text
 main:
 	li $a0, 0

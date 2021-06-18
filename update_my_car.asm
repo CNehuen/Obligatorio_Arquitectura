@@ -12,7 +12,7 @@ update_my_car:
 				##Zona inicial es Zona 1  	
  				# y = 3 + t2 *22
  			 	#Lo que importa es lo que vale $t2
- 			 	#la $t1, coordenadaenYauto 	#Zona y Movimiento
+ 			 	la $t1, coordenadaenYauto 	#Zona y Movimiento
 				lb $t2, ($t1)				 				 	
  			 	bne $t2, -1, movimientoAuto 
  			 	li $t2, 0
@@ -25,20 +25,26 @@ update_my_car:
 				beqz $t2, finMovimientoAuto
 				la $t1, data2  
 				lw $s2, ($t1) #0x00 00 00 00			
-				bne $s2, 'w', finMovimientoAuto
-				bne $s2, 's', finMovimientoAuto										  						  
-				#la $t1, coordenadaenYauto 	#Zona y Movimiento
-				lb $t2, ($t1) 			    #Zona actual 					
-				la $a0, limpiarAuto 				#Es para que limpie el auto  
-				li $a1, 4 					#Posicion en x siempre es 4		
-				move $a2, $t4					
-				jal dibujarString 
-				la $a0, limpiarAuto 				#Es para que limpie el auto  
-				li $a1, 4 
-				addi $t4, $t4, 4					#Posicion en x siempre es 4		
-				move $a2, $t4					
-				jal dibujarString 
-				#la $t1, coordenadaenYauto     				        				
+				beq $s2, 'w', limpio_mi_posicion
+				beq $s2, 's', limpio_mi_posicion									  						  
+				j finMovimientoAuto
+				limpio_mi_posicion:
+				la $t1, coordenadaenYauto 	#Zona y Movimiento
+				lb $t2, ($t1) 			    #Zona actual 	
+				mul $t4, $t2, 22 
+				addi $a1, $t4,3					
+				li $a0, 4 					#Posicion en x siempre es 4		
+				li $a3, 0
+				li $s3, 17			
+				delete_my_car:
+					addi $s3, $s3, -1
+					beqz $s3, end_delete_my_car
+					li $a2, 12
+					jal ColumnasVerticales
+					addiu $a0, $a0,1
+					j delete_my_car
+				end_delete_my_car:
+				la $t1, coordenadaenYauto     				        				
 				lb $t2, ($t1)  
 				beq $s2, 'w', SubirAuto
 				beq $s2, 's', BajarAuto	
@@ -51,13 +57,11 @@ update_my_car:
 				no_subir:
 				li $a0, 4    #Recibe posicion en x 
 				mul $t4, $t2, 22 
-				addi $t4, $t4,3
-				move $a1, $t4	 #Recibe posicion en y 
-				li $a2, 1 
+				addi $a1, $t4,3
+				#move $a1, $t4	 #Recibe posicion en y 
+				li $a3, 1 
 				sb $t2, ($t1) 		   
-				jal dibujar_auto	  																						 						 						
-				
-			
+				jal dibujar_auto																							 						 						
 				j finMovimientoAuto
 						
 				BajarAuto:
@@ -66,12 +70,11 @@ update_my_car:
 				no_bajar:
 				li $a0, 4    #Recibe posicion en x 
 				mul $t4, $t2, 22 
-				addi $t4,$t4,3
-				move $a1, $t4	 #Recibe posicion en y 
-				li $a2, 1  
+				addi $a1, $t4,3
+				#move $a1, $t4	 #Recibe posicion en y 
+				li $a3, 1
 				sb $t2, ($t1)		   
-				jal dibujar_auto																			 
-				
+				jal dibujar_auto																		 
 				j finMovimientoAuto
 						
 			finMovimientoAuto:																									

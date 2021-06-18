@@ -100,7 +100,7 @@ flappy_new_game:
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
 	addi $sp, $sp, 4 
-	
+	li $a0,1
 	jr $ra
 	
 

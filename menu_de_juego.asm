@@ -24,10 +24,10 @@ menu_de_juego:
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
-	gamemenu:
-	jal clean_screen
 	addi $a0,$a0, 1
 	move $s0, $a0
+	gamemenu:
+	jal clean_screen
 	jal menu #menu de juego
 	beqz $v0, nueva_partida 
 	j salir_juego
