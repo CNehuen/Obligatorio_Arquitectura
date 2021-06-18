@@ -1,4 +1,5 @@
 .globl menu
+.globl dibujar_subrayar
 .data
 MenuPrincipal: .asciiz "MENU PRINCIPAL"
 StringRacing: .asciiz "CAR RACING"

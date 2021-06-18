@@ -9,6 +9,11 @@ car_new_game:
 	#Defino 12 valores y la posicion 0 del vector actua de indice
 	#Avanzo como si fuera un array circular y avanzo de a 7 posiciones por vez,
 	#por lo tanto los valores vuelven a repetirse cada 7*12 = 84 repeticiones
+	la $t0, coordenadaenYauto
+	li $t1, -1
+	sb $t1, ($t0)
+	la $t0, scores
+	sw $zero, ($t0)
 	la $t1, car16x12Inv
 	li $t0, 0x0003
 	sh $t0, ($t1)
@@ -61,14 +66,14 @@ car_new_game:
 	li $t0, 0xC000
 	sh $t0, 22($t1)
 	li $t0,0
-	li $t1,18
+	li $t1,12
 	la $t3, matriz_posiciones_autos
-	#loop_matriz: # inicializo matriz de posiciones de vehiculos obstaculos
-	#	li $t2, -1
-	#	sb $t2, ($t3)
-	#	addiu $t3, $t3, 1
-	#	addiu $t0, $t0,1
-	#	bne $t0, $t1, loop_matriz
+	loop_matriz: # inicializo matriz de posiciones de vehiculos obstaculos
+		li $t2, -1
+		sb $t2, ($t3)
+		addiu $t3, $t3, 1
+		addiu $t0, $t0,1
+		bne $t0, $t1, loop_matriz
 	
 	la $t0, pseudorandom_values
 	lb $t1, ($t0)
@@ -90,30 +95,31 @@ car_new_game:
 	sb $t1, 5($t0)
 	li $t1, 0x6
 	sb $t1, 6($t0)
-	li $t1, 0x2
+	li $t1, 0x6
 	sb $t1, 7($t0)
-	li $t1, 0x4
+	li $t1, 0x5
 	sb $t1, 8($t0)
 	li $t1, 0x5
 	sb $t1, 9($t0)
 	li $t1, 0x3
 	sb $t1, 10($t0)
-	li $t1, 0x4
+	li $t1, 0x6
 	sb $t1, 11($t0)
 	li $t1, 0x5
 	sb $t1, 12($t0)	
 	jal clean_screen
-
+	li $a0, 4
+	li $a1, 20
+	li $a2, 0x00ffffff
+	jal dibujar_subrayar
+	li $a1, 41
+	jal dibujar_subrayar
 	loop_racing_game:
 		jal update_cars 
-		
-		#jal update_my_car
-		#jal choque
-		#beq $v0, 1, end_racing_game
-		#jal update_score_2
-		li $v0, 32
-		li $a0, 50
-		syscall
+		jal update_my_car
+		jal perdioAuto
+		beq $v0, 1, end_racing_game
+		jal update_score_2
 		j loop_racing_game
 		
 	end_racing_game:
@@ -129,6 +135,7 @@ car_new_game:
 	li $v0, 32
 		li $a0, 5000
 		syscall
+		li $a0, 2
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
 	addi $sp, $sp, 4 
