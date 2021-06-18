@@ -89,29 +89,20 @@ update_cars:
 			div $s2, $t3 
 			mflo $t3 # en t3 guardo el resultado de la division, que me indica a que carril pertenece el auto
 			
-			la $a0, limpiarAuto 				#Es para que limpie el auto  
-			ble $t5, 110, errase_hole_car
-				li $a1, 111					#Posicion en x del auto	actual
-				j continue_here
-				errase_hole_car:
-				move $a1, $t5
-			continue_here:
-			
 			mulu $t6, $t3,22
-			addiu $a2, $t6,3				#Posicion en y del auto	actual
-			jal dibujarString
-			la $a0, limpiarAuto
-			addiu $a2, $a2, 4
-			jal dibujarString
-
+			addiu $a1, $t6,3				#Posicion en y del auto	actual
 			lb $t5, ($s4)
 			addi $a0, $t5, -1 #nueva posicion en x del auto
 			sb $a0, ($s4)
 			beqz $a0, no_car_update
-			
-			addi $a1, $a2, -4 #posicion en y original
 			li $a2, 0
 			jal dibujar_auto
+			bgt $a0 ,111, skip_back_line
+				addi $a0, $a0,16
+				li $a2, 12
+				li $a3, 0x0
+				jal ColumnasVerticales
+			skip_back_line:
 		no_car_update:
 		addiu $s2, $s2, 1
 		j loop_update_cars_positions
