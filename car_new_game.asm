@@ -135,11 +135,10 @@ car_new_game:
 	li $v0, 32
 		li $a0, 5000
 		syscall
-		li $a0, 2
+		li $v0, 2
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
 	addi $sp, $sp, 4 
-
-
+	jr $ra
 
 	

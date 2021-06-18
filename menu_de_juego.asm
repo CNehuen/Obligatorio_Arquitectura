@@ -28,15 +28,18 @@ menu_de_juego:
 	move $s0, $a0
 	gamemenu:
 	jal clean_screen
+	move $s0, $a0
 	jal menu #menu de juego
 	beqz $v0, nueva_partida 
 	j salir_juego
 	nueva_partida:
 		beq $s0, 2, juego_car
 			jal flappy_new_game
+			move $a0, $v0
 			j gamemenu
-			 juego_car:
-			 jal car_new_game
+			juego_car:
+			jal car_new_game
+			move $a0, $v0
 			j gamemenu
 	salir_juego:
 	jal clean_screen
