@@ -63,12 +63,12 @@ car_new_game:
 	li $t0,0
 	li $t1,18
 	la $t3, matriz_posiciones_autos
-	loop_matriz: # inicializo matriz de posiciones de vehiculos obstaculos
-		li $t2, -1
-		sb $t2, ($t3)
-		addiu $t3, $t3, 1
-		addiu $t0, $t0,1
-		bne $t0, $t1, loop_matriz
+	#loop_matriz: # inicializo matriz de posiciones de vehiculos obstaculos
+	#	li $t2, -1
+	#	sb $t2, ($t3)
+	#	addiu $t3, $t3, 1
+	#	addiu $t0, $t0,1
+	#	bne $t0, $t1, loop_matriz
 	
 	la $t0, pseudorandom_values
 	lb $t1, ($t0)

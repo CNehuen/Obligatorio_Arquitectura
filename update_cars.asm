@@ -18,7 +18,7 @@ update_cars:
 	lb $t1, 17($s0)
 	beq $t1,87, nuevos_autos_random
 	add $t2, $t2, $t1	
-	beq $t2, -3, nuevos_autos_random
+	beq $t2, 0, nuevos_autos_random
 	j update_cars_positions
 	
 	nuevos_autos_random:
@@ -69,7 +69,7 @@ update_cars:
 				sb $t4, ($t5)
 				j fin_guardo_menos_uno
 				guardo_menos_uno:
-				li $t4, -1
+				li $t4, 0
 				sb $t4, ($t5)
 			fin_guardo_menos_uno:
 			
@@ -84,7 +84,7 @@ update_cars:
 		add $s4, $s2, $s0
 		lb $t5, ($s4)
 		
-		beq $t5, -1, no_car_update
+		beq $t5, 0, no_car_update
 			li $t3, 6
 			div $s2, $t3 
 			mflo $t3 # en t3 guardo el resultado de la division, que me indica a que carril pertenece el auto
@@ -108,15 +108,15 @@ update_cars:
 		addiu $s2, $s2, 1
 		j loop_update_cars_positions
 		delete_car:
-				move $a2, $a1
-				move $a1, $a0
-				la $a0, limpiarAuto 				#Es para que limpie el auto  					
-				jal dibujarString 
-				la $a0, limpiarAuto 				#Es para que limpie el auto  
-				li $a1, 4 
-				addi $t4, $t4, 4					#Posicion en x siempre es 4		
-				move $a2, $t4					
-				jal dibujarString
+				#move $a2, $a1
+				#move $a1, $a0
+				#la $a0, limpiarAuto 				#Es para que limpie el auto  					
+				#jal dibujarString 
+				#la $a0, limpiarAuto 				#Es para que limpie el auto  
+				#li $a1, 4 
+				#addi $t4, $t4, 4					#Posicion en x siempre es 4		
+				#move $a2, $t4					
+				#jal dibujarString
 	end_loop_update_cars_positions:	
 	end_update_cars:
 
