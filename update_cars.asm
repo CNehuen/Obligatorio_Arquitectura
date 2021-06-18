@@ -94,7 +94,8 @@ update_cars:
 			lb $t5, ($s4)
 			addi $a0, $t5, -1 #nueva posicion en x del auto
 			sb $a0, ($s4)
-			beqz $a0, no_car_update
+			li $t3,16
+			beqz $a0, delete_car
 			li $a2, 0
 			jal dibujar_auto
 			bgt $a0 ,111, skip_back_line
@@ -106,6 +107,16 @@ update_cars:
 		no_car_update:
 		addiu $s2, $s2, 1
 		j loop_update_cars_positions
+		delete_car:
+				move $a2, $a1
+				move $a1, $a0
+				la $a0, limpiarAuto 				#Es para que limpie el auto  					
+				jal dibujarString 
+				la $a0, limpiarAuto 				#Es para que limpie el auto  
+				li $a1, 4 
+				addi $t4, $t4, 4					#Posicion en x siempre es 4		
+				move $a2, $t4					
+				jal dibujarString
 	end_loop_update_cars_positions:	
 	end_update_cars:
 
