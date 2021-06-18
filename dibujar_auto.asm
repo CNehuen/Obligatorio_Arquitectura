@@ -22,7 +22,6 @@ dibujar_auto:
 	li $t3, 12  #Recorre las 12 filas 
 	addi $t0, $t0,-512		
 	addi $t0, $t0,64	
-	
 	LoopCarRow: 
 	    beqz $t3, finLoopCar
 	    li $t4, 16                 #Para la matriz que contiene el auto
@@ -31,8 +30,10 @@ dibujar_auto:
 	    addi  $t0, $t0, -64			#Vuelvo 8 pixeles para atras 
 		lh $t1, ($t2)
 		addiu $t2, $t2, 2
+		li $t6, 0
 		LoopCarColumn: 
 		    beqz $t4, LoopCarRow
+		    addi $t6, $t6,1
 		    addi $t4, $t4, -1
 	 		andi $t5, $t1, 0x00000001 	 #1000 0000 -> 0x80
 			beqz $t5, PixelNegro
@@ -47,7 +48,15 @@ dibujar_auto:
 	           	TerminoPintarCar:   	
 	           	srl $t1, $t1, 1
 				addiu $t0, $t0, 4 
-	              
+				add $t7, $t6, $a0
+				beq $t7, 128,corto_auto 
+	    			j LoopCarColumn
+	    		corto_auto:  
+	    		mulu $t6, $t6,4
+	    		sub $t0, $t0, $t6
+	    		addi $t0, $t0, 64
+	    		#li $t6,0
+	    		j LoopCarRow        
 		j LoopCarColumn
 	
 	finLoopCar:  

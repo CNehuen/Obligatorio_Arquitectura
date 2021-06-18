@@ -1,6 +1,4 @@
 .globl car_new_game
-.eqv control2 0xFFFF0000
-.eqv data2 0xFFFF0004
 car_new_game:
 	
 	#-----PROLOGO-----#	
@@ -11,31 +9,66 @@ car_new_game:
 	#Defino 12 valores y la posicion 0 del vector actua de indice
 	#Avanzo como si fuera un array circular y avanzo de a 7 posiciones por vez,
 	#por lo tanto los valores vuelven a repetirse cada 7*12 = 84 repeticiones
-	la $t0, car16x12
-	li $t1, 0xC000
+	la $t1, car16x12Inv
+	li $t0, 0x0003
 	sh $t0, ($t1)
-	li $t1, 0x9F1F
+	li $t0, 0xF8F9
 	sh $t0, 2($t1)
-	li $t1, 0x9F1F
+	li $t0, 0xF8F9
 	sh $t0, 4($t1)
-	li $t1, 0x8404
+	li $t0, 0x2021
 	sh $t0, 6($t1)
-	li $t1, 0xBFF5
+	li $t0, 0xAFFD
 	sh $t0, 8($t1)
-	li $t1, 0xF87F
+	li $t0, 0xFE1F
 	sh $t0, 10($t1)
-	li $t1, 0xF87F
+	li $t0, 0xFE1F
 	sh $t0, 12($t1)
-	li $t1, 0xBFF5
+	li $t0, 0xAFFD
 	sh $t0, 14($t1)
-	li $t1, 0x8404
+	li $t0, 0x2021
 	sh $t0, 16($t1)
-	li $t1, 0x9F1F
+	li $t0, 0xF8F9
 	sh $t0, 18($t1)
-	li $t1, 0x9F1F
+	li $t0, 0xF8F9
 	sh $t0, 20($t1)
-	li $t1, 0xC000
+	li $t0, 0x0003
 	sh $t0, 22($t1)
+	
+	la $t1, car16x12
+	li $t0, 0xC000
+	sh $t0, ($t1)
+	li $t0, 0x9F1F
+	sh $t0, 2($t1)
+	li $t0, 0x9F1F
+	sh $t0, 4($t1)
+	li $t0, 0x8404
+	sh $t0, 6($t1)
+	li $t0, 0xBFF5
+	sh $t0, 8($t1)
+	li $t0, 0xF87F
+	sh $t0, 10($t1)
+	li $t0, 0xF87F
+	sh $t0, 12($t1)
+	li $t0, 0xBFF5
+	sh $t0, 14($t1)
+	li $t0, 0x8404
+	sh $t0, 16($t1)
+	li $t0, 0x9F1F
+	sh $t0, 18($t1)
+	li $t0, 0x9F1F
+	sh $t0, 20($t1)
+	li $t0, 0xC000
+	sh $t0, 22($t1)
+	li $t0,0
+	li $t1,18
+	la $t3, matriz_posiciones_autos
+	loop_matriz: # inicializo matriz de posiciones de vehiculos obstaculos
+		li $t2, -1
+		sb $t2, ($t3)
+		addiu $t3, $t3, 1
+		addiu $t0, $t0,1
+		bne $t0, $t1, loop_matriz
 	
 	la $t0, pseudorandom_values
 	lb $t1, ($t0)
@@ -45,47 +78,41 @@ car_new_game:
 	start_circular_array2:
 	sb $zero, ($t0)
 	load_circular_array2:
-	li $t1, 10
+	li $t1, 0x1
 	sb $t1, 1($t0)
-	li $t1, 40
+	li $t1, 0x2
 	sb $t1, 2($t0)
-	li $t1, 32
+	li $t1, 0x4
 	sb $t1, 3($t0)
-	li $t1, 3
+	li $t1, 0x5
 	sb $t1, 4($t0)
-	li $t1, 13
+	li $t1, 0x6
 	sb $t1, 5($t0)
-	li $t1, 21
+	li $t1, 0x6
 	sb $t1, 6($t0)
-	li $t1, 28
+	li $t1, 0x2
 	sb $t1, 7($t0)
-	li $t1, 8
+	li $t1, 0x4
 	sb $t1, 8($t0)
-	li $t1, 16
+	li $t1, 0x5
 	sb $t1, 9($t0)
-	li $t1, 24
+	li $t1, 0x3
 	sb $t1, 10($t0)
-	li $t1, 23
+	li $t1, 0x4
 	sb $t1, 11($t0)
-	li $t1, 36
+	li $t1, 0x5
 	sb $t1, 12($t0)	
 	jal clean_screen
+
 	loop_racing_game:
-		la $t1, control2
-		lw $t2, ($t1)
-		andi $t2 , $t2, 0x01
-		#beqz $t2, continue_loop2
-		la $t1, data2
-		lw $t2, ($t1)		
-		#continue_loop2:
 		jal update_cars 
-		jal update_my_car
+		
+		#jal update_my_car
 		#jal choque
-		beq $v0, 1, end_racing_game
-		jal update_score_2
-		#jal timer_background_refresh
+		#beq $v0, 1, end_racing_game
+		#jal update_score_2
 		li $v0, 32
-		li $a0, 25
+		li $a0, 50
 		syscall
 		j loop_racing_game
 		
