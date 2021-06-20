@@ -1,7 +1,8 @@
-.globl update_score_2
+#Toma el puntaje almacenado en un int32 , lo convierte en String de 4 caracteres y lo muestra en pantalla
 
+.globl update_score_2
 update_score_2:
-	#Coordenadas del string del puntaje : [x($a1) = 47 ; y($a2) = 2]
+	#Coordenadas del string del puntaje : [x($a1) = 95 ; y($a2) = 2]
 	#-----PROLOGO-----#	
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 

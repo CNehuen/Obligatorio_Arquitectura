@@ -1,3 +1,19 @@
+#Archivo principal del juego CAR RACING. Contiene las declaraciones iniciales necesarias para iniciar el juego y
+# ejecutarlo 
+#El juego consta de un vehiculo que controla el usuario y vehculos obstaculos que se general aleatoriamente,
+#	en sentido contrario al del usuario. EL usuario debe desplazasrse dentro e 3 carriles posibles (superior,
+#	central o inferior )para esquivarlos. La cantidad de cehiculosesquivados se convierten en 
+#	el puntaje que obtiene el usuario
+#Los obstaculos se desplazan de derecha a izquierda, y el usuario debe subir o bajar con las teclas 'w' o 's'
+#	para evitar colisionar con los obstaculos. Si el usuario se encuentra en el carril superior no puede
+#	seguir subiendo, y si esta en el inferior no puede seguir bajando
+#La funcionalidad del juego consta de un bucle el cual se divide en 4 partes:
+#	- update_cars: se encarga de generar los vehiculos obstaculos del juego y desplazarlos 
+#	- update_my_car: controla el movimiento del vehiculo que controla el usuario
+#	- perdioAuto: verifica si el usuario perdio o si el juego sigue
+#	- update_score_2: se encarga de mostrar el puntaje en pantalla
+#Cuando el usuario pierde, se congela la imagen por 1,5 seg, luego por 5 segundos se muestra el puntaje obtenido,
+# y al final se muestra el menu del juego
 .globl car_new_game
 car_new_game:
 	
@@ -8,7 +24,7 @@ car_new_game:
 	#Defino valores que simulen la funcion random
 	#Defino 12 valores y la posicion 0 del vector actua de indice
 	#Avanzo como si fuera un array circular y avanzo de a 7 posiciones por vez,
-	#por lo tanto los valores vuelven a repetirse cada 7*12 = 84 repeticiones
+	#por lo tanto los valores vuelven a repetirse cada 21 repeticiones
 	la $t0, coordenadaenYauto
 	li $t1, -1
 	sb $t1, ($t0)
@@ -127,12 +143,12 @@ car_new_game:
 		li $a0, 1500
 		syscall
 		jal clean_screen
-	jal update_score
-	la $a0, your_score
+		jal update_score
+		la $a0, your_score
 		li $a1, 23
 		li $a2, 30
 		jal dibujarString
-	li $v0, 32
+		li $v0, 32
 		li $a0, 5000
 		syscall
 		li $v0, 2

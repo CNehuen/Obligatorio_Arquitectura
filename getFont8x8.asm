@@ -1,7 +1,6 @@
+#Funcion que devuelve en el registro font8x8 la codificacion de los pixeles para cada uno de los caracteres definidos
+
 .globl getFont8x8
-
-
-
 getFont8x8: 
 	#a0 -> char que debe devolver en formato font8x8 para dibujar en el display
 	la $t0, font8x8

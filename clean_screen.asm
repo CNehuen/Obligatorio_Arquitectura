@@ -1,3 +1,4 @@
+#Limpia la pantalla dejandola en negro para poder los dibujos correspondientes sin que estorben los anteriores
 .globl clean_screen
 clean_screen:
 	la $t0, img

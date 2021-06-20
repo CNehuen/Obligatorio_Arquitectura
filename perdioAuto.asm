@@ -1,5 +1,13 @@
+#Verifica si el usuario colisiono contra algun obstaculo. 
+#La verificacion se hace en 2 pasos:
+#	- Se verifica el frente del vehiculo: como el frente es plano, verificar un solo punto del frente es suficiente
+#		para determinar si hubo colision
+#	- Se verifica la parte posterior del vehiculo: para verificar si el usuario no se desplazo hacia donde ya
+#		habia un obstaculo. se verifican 2 puntos en concreto en la parte posterior del vehiculo del usuario
+#		que corresponden al extremo superior y el centro para asegurarse de encontrar un obstaculo si lo hay.
+#		Se consideran solo dos puntos porque con dichos puntos, elegidos a proposito, ya que con solo dos se puede
+#		realizar la verificacion y evitar hacer cuentas incecesarias de verificacion en el codigo
 .globl perdioAuto
-
 perdioAuto:	 
    		#-----PROLOGO-----#
 		#Guardo $ra en sp para no perderlo

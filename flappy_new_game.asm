@@ -1,12 +1,32 @@
+#Archivo principal del juego FLAPPY BIRD. Contiene las declaraciones iniciales necesarias para iniciar el juego y
+# se encarga de ejecutarlo 
+#El juego consiste de un pajaro comandado por el usuario, el cual debe pasar a travez de obstaculos. El usuario
+#	puede hacer saltar al pajaro con la barra espaciadora del teclado. Los obstaculos son columnas con un espacio
+#	en el medio. Este espacio se encuentra a diferentes alturas, y el usuario pierde si el pajaro toca alguna
+#	de las columnas
+#La funcionalidad del juego consta de un bucle el cual se divide en 4 partes:
+#	- update_column: se encarga de generar los obstaculos del juego y desplazarlos 
+#	- update_bird: controla el movimiento del pajaro
+#	- perdio: verifica si el usuario perdio o si el juego sigue
+#	- update_score: se encarga de mostrar el puntaje en pantalla
+#Cuando el usuario pierde, se congela la imagen por 1,5 seg, luego por 5 segundos se muestra el puntaje obtenido,
+# y al final se muestra el menu del juego
+
 .globl flappy_new_game
 .eqv control1 0xFFFF0000
 .eqv data1 0xFFFF0004
 flappy_new_game:
+
+	#Considerciones generales
+	# tamaño del pajaro  -> 8x8 pixeles
+	# tamaño del espacio entre colunas -> 20 pixeles
+	# salto del bicho cuantos pixeles sube -> 5
+
 	#Definiciones:
 	#Coordenadas del string del puntaje : [x($a1) = 47 ; y($a2) = 2]
 	#Coordnadas iniciales del pajaro: [x($a1) = ; y($a2) = ]
 	#Cantidad maxima de columnas en el display = 2
-	#Ancho de las columnas = 10
+	#Ancho de las columnas = 10 pixeles
 	
 	#-----PROLOGO-----#	
 	#Guardo $ra en sp para no perderlo
@@ -66,7 +86,7 @@ flappy_new_game:
 		andi $t2 , $t2, 0x01
 		beqz $t2, continue_loop
 		la $t1, data1  
-		lw $t2, ($t1) #0x00 00 00 00			
+		lw $t2, ($t1)		
 		bne $t2, ' ', continue_loop
 		la $t0, coordenadaenY
 		lb $t1, 1($t0)
@@ -78,7 +98,6 @@ flappy_new_game:
 		jal perdio			# En caso de que choque, retorno por parametro un booleano True para notificar que se perdio y terminar la partida
 		beq $v0, 1, end_flappy_game
 		jal update_score
-		#jal timer_background_refresh
 		li $v0, 32
 		li $a0, 25
 		syscall
@@ -89,14 +108,15 @@ flappy_new_game:
 		li $a0, 1500
 		syscall
 		jal clean_screen
-	jal update_score
-	la $a0, your_score
+		jal update_score
+		la $a0, your_score
 		li $a1, 23
 		li $a2, 30
 		jal dibujarString
-	li $v0, 32
+		li $v0, 32
 		li $a0, 5000
 		syscall
+		
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
 	addi $sp, $sp, 4 
