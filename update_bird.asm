@@ -1,6 +1,12 @@
+#Controla el movimiento del pajaro
+#El pajaro se mueve verticalmente, y las columnas horizaontalmente de derecha a izquiera, lo que hace parecer que
+#	el pajaro se esta desplazando.
+#Existe un vector coordenadaenY que almacena la posicion actual del pajaro (en el eje Y) y un int que representa,
+#	en el caso de que el pajaro haya saltado, cuantos pixeles debe seguir subiendo. Si el int es cero, entonces el
+#	pajaro debe descender. Este numero se actualiza con cada comando "saltar" que se ingresa en el teclado con
+#	la tecla de espacio
+
 .globl update_bird
-
-
 update_bird:
 			#-----PROLOGO-----#
 			#Guardo $ra en sp para no perderlo
@@ -22,60 +28,41 @@ update_bird:
 			bgez $t3, SubiendoPajaro #El boton hace que suba 2 pixeles
 			
 			SubiendoPajaro:
-			beqz $t2, no_subir
-			sub $t2, $t2, 1 #Sube 1 pixel
-			no_subir:
-			la $a0, bird8x8 #Dibuja el pajaro
-			li $a1, 20 #Posicion en x
-			move $a2, $t2 #Nueva posicion en y 19
-			sub $t3, $t3, 1 #Vuelvo mi boton a 0
-			sb $t3, 1($t1) #Lo guardo
-			sb $t2, ($t1) #Guardo mi nueva posicion actual
-			jal dibujarString #Dibujo el pajaro
-			move $v0, $zero
-			j finMovimientoPajaro
+				beqz $t2, no_subir
+				sub $t2, $t2, 1 #Sube 1 pixel
+				no_subir:
+				la $a0, bird8x8 #Dibuja el pajaro
+				li $a1, 20 #Posicion en x
+				move $a2, $t2 #Nueva posicion en y 19
+				sub $t3, $t3, 1 #Vuelvo mi boton a 0
+				sb $t3, 1($t1) #Lo guardo
+				sb $t2, ($t1) #Guardo mi nueva posicion actual
+				jal dibujarString #Dibujo el pajaro
+				move $v0, $zero
+				j finMovimientoPajaro
 
 			BajarPajaro:
-			addi $t2, $t2, 1 #Baja un pixel
-			beq $t2, 54, partidaPerdida
-			sigo:
-			la $a0, bird8x8
-			li $a1, 20
-			move $a2, $t2
-			sub $t3, $t3, 1
-			bgez $t3, ContinuarBajando
-			addi $t3, $t3, 1
-			ContinuarBajando:
-			sb $t3, 1($t1)
-			sb $t2, ($t1)
-			jal dibujarString #Dibujo el pajaro
-			move $v0, $zero
-			j finMovimientoPajaro
+				addi $t2, $t2, 1 #Baja un pixel
+				beq $t2, 54, partidaPerdida
+				sigo:
+				la $a0, bird8x8
+				li $a1, 20
+				move $a2, $t2
+				sub $t3, $t3, 1
+				bgez $t3, ContinuarBajando
+				addi $t3, $t3, 1
+				ContinuarBajando:
+				sb $t3, 1($t1)
+				sb $t2, ($t1)
+				jal dibujarString #Dibujo el pajaro
+				move $v0, $zero
+				j finMovimientoPajaro
 
 			partidaPerdida:
 			sub $t2, $t2, 1
 			j sigo
-# li $v0, 1
 finMovimientoPajaro:
 #-----EPILOGO-----#
 lw $ra , ($sp)
 addi $sp, $sp, 4
 jr $ra
-##El pajaro va arrancar teniendo
-##En la posicion en x=20 y en la posicion en y=20
-##La x se va mantener y la posicion en y va a variar
-##Como hago para variar la y?
-##Hago un vector que tenga mi posicion actual
-##Y un alpha que tenga cuantos saltos voy teniendo
-##Que lo haga en dos tiempos
-##Si alpha es mayor a 0 que haga
-## ynuevo = yactual + beta
-##Si alpha es menor a 0 que haga
-## ynuevo = yactual - beta
-##Beta se va mover dos pixeles para arriba
-##En dos tiempos distintos
-
-
-			
-			
-			

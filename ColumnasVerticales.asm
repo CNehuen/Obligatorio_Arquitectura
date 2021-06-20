@@ -1,13 +1,13 @@
-.globl ColumnasVerticales                                       
-                                                                                                                             
+#Funcion qeu dibuja una hilera vertical. Recibe por parametros las coordenadas de inicio (Xi,Yi), las cantidad de
+#	pixeles a pintar y el color (blanco o negro)
+.globl ColumnasVerticales                                                                                                                                                 
 ColumnasVerticales:   
-	#Funcion que pinta rectangulos verticalemte desde la pisicion (x,y) 
-	#hacia abajo n veces, del color pasado por parametro
 	#Parametros:
 	#$a0 -> posicion en x
 	#$a1 -> posicion en y
 	#$a2 -> cantidad de rectangulos a pintar
 	#$a3 -> color
+	
 	la $t0, img
 	addu $t3,$t0,32768
 	mulu $t1,$a1,128 							#calculo la posicion del rectangulo de posicion (x,y) en la memoria

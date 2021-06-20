@@ -3,6 +3,7 @@
 #Nehuen Carol - 225459
 
 #Version Desktop
+#Archivo principal que reserva los espacios en memoria necesarios. Es por donde comienza la ejecucion del sistema
 .globl main
 .globl img
 .globl Int8x8 

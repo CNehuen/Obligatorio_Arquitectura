@@ -1,3 +1,8 @@
+#Controla los vehiculos obstaculos del juego
+#Utiliza el vector matriz_posiciones_autos para almacenar la coordenada en X de cada vehiculo,
+#Cuando crean nuevos vehiculos, la cantidad y posicion se obtienen utilziando  
+#	un array circular de 12 posiciones, con un paso de 7 posiciones, para simular un comportamiento aleatorio
+
 .globl update_cars
 update_cars: 
 	#-----PROLOGO-----#	

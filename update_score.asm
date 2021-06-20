@@ -1,5 +1,6 @@
+#Actualiza el puntaje almacenado en un int32 cuando es necesario, lo convierte en String de 4 caracteres 
+#	y lo muestra en pantalla
 .globl update_score
-
 update_score:
 	#Coordenadas del string del puntaje : [x($a1) = 47 ; y($a2) = 2]
 	#-----PROLOGO-----#	
@@ -32,13 +33,15 @@ update_score:
 	#-----EPILOGO-----#
     lw $ra , ($sp) 	
 	addi $sp, $sp, 4 
-	
 	jr $ra
 
 
 intToString:
+	#Funcion para convertir el int32 a String de 4 caracteres
+	#Parametros:
 	#a0 -> direccion de Int8x8
 	#a1 -> int a convertir
+	#Obtengo: el string guardado en el registro Int8x8
 	li $t1, 4
 	loop_converter:
 		beqz $t1, end_converter
