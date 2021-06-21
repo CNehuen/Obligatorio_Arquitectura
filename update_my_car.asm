@@ -1,3 +1,6 @@
+#Controla el movimiento del vehiculo del usuario. La pisicion del mismo se almacena en un vector de 1 posicion, en
+#	un formato int del codigo del carril en el que se encuentra (0 para el superior, 1 para el central y 2 para 
+#	el inferior)
 .globl update_my_car
 .eqv control2 0xFFFF0000
 .eqv data2 0xFFFF0004

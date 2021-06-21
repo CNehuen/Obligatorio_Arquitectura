@@ -1,19 +1,12 @@
+#Este archivo se encarga de infromar al archivo menu el menu de que juego mostrar, y en base a lo obtenido
+# ejecuta el juego correspondiente
+
 .globl menu_de_juego
-#Considerciones generales
-# tamaño del bicho  -> 8x8
-# tamaño del espacio entre colunas -> 20
-# salto del bicho cuantos pixeles sube -> 4
-#cuanto tarda en completar el salto -> 2
-#Funciones a realizar
-# - Refresh puntaje (tranformar el registro en string)
-# - Refresh background -> mover las columnas ()
-# - Refresh posicion del bicho (x,y, 1 ->(subir)/0 ->(bajar))
 
 .text
-
 menu_de_juego:
 	#Se muestra el menu de la siguiente forma:
-	# Titulo: 
+	# Titulo: Titulo del juego
 	#Opciones de menu:
 	#	NUEVO JUEGO: comienza nueva partida
 	#	SALIR: retorna al menu de seleccion de juego

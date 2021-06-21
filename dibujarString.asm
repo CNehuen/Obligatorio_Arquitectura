@@ -1,21 +1,14 @@
-.globl dibujarString
-##########################
-#Menu Principal 
-#Elegir juego
-#Flappy Bird 
-#El otro juego
-#Nueva partida
-#Ranking
-#Su puntaje (String) : (durante un tiempo determinado) (Temporizador) 
-#Puntaje (int)
-#Salir 
+#Funcion que se encarga, dado un string, de dibujarlo en pantalla en las coordenadas establecidas por parametro
+#La funcion recorre cada caracter del string, obtiene mediante al funcion getFont8x8 la representacion de pixeles
+#	correspondiente a ese char, y lo dibuja en pantalla
 
+.globl dibujarString
 dibujarString:
 	#Max caracteres por linea : 14
-	#$a0 -> string para dibujar #
+	#Parametros:
+	#$a0 -> string para dibujar 
 	#$a1 -> coordenada X del String en la pantalla
 	#$a2 -> coordenada Y del String en la pantalla
-	#$a3 -> color?
 	#-----PROLOGO-----#
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 

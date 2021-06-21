@@ -1,11 +1,19 @@
+#Controla las columnas obstaculos del juego
+#Utiliza el vector column_coord para almacenar la coordenada en X de cada columna en sus primeras dos´posiciones,
+#	y un valor auxiliar en la 3ra posicion para crear una 3ra columna mientras desaparece la primera
+#Cuando crea una columna nueva, la parte superior del obstaculo tiene una altuta aleatoria la cual se obtiene con 
+#	un array circular de 12 posiciones, con un paso de 7 posiciones, para simular un comportamiento aleatorio
+#La altura de parte inferior de la columna se calcula con la altura de la superior + el espacion entre columnas
+# 	que es de 20 pixeles, hasta el borde inferior de la pantalla. Las alturas de las columnas se almacenean en un 
+#	vector de 3 posiciones (column_height): las primeras dos posiciones corresponden con las alturas de las columnas
+#	en pantalla, y la 3ra poscicion corresponde a la altura de la nuevo columna a crear
+
 .globl update_column
 update_column:
 	#-----PROLOGO-----#	
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 
 	sw $ra, ($sp)
-	
-	
 	
 	la $t1, column_coord
 	la $t0, img
@@ -27,7 +35,6 @@ update_column:
 			blt $t2, 10, errase_column
 			sub $t8, $t8, 40  #me muevo hacia atras hacia donde debo pintar la columna
 			#verifico si debo pintar negro o blanco
-			#t3,t5,t6,t7 libres
 			la $t3, column_heigh
 			addiu $t3,$t3,1
 			subu $t3,$t3,$t4 #calculo la coordenada en Y donde estoy parado

@@ -1,5 +1,8 @@
-.globl perdio
+#Verifca se el pajaro choco contra los obstaculos
+#Para realziar la verificacion, toma en cuenta la columna mas proxima al pajaro solo cuando esta lo suficientemente
+#	cerca para no hacer verificaciones innecesarias
 
+.globl perdio
 perdio:
 		#-----PROLOGO-----#
 		#Guardo $ra en sp para no perderlo

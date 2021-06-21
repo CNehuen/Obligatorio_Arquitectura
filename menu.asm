@@ -1,3 +1,5 @@
+#Este archivo se encarga de desplegar cada menu de la consola (menu principal y el menu de cada juego)
+#Ademas, se encarga de subrayar la opcion de menu sobre la cual se esta posicionado
 .globl menu
 .globl dibujar_subrayar
 .data
@@ -10,10 +12,11 @@ MenuJuego2: .asciiz "SALIR"
 .eqv data 0xFFFF0004
 .text
 menu:
+	# Parametros:
 	#$a0 -> selector de manu para mostrar
 	#0 -> Menu principal de seleccion de juego
 	#1-> Menu de juego
-	
+	#Devuelve: en $v0 el int correspondiente a la opcion de menu seleccionada (0 o 1)
 	
 	#Guardo $ra en sp para no perderlo
 	addi $sp, $sp, -4 
@@ -77,14 +80,13 @@ menu:
 		li $a0, 2
 		li $a2, 0x00ffffff
 		jal dibujar_subrayar #subrayo el primer item
-		#subi $t8, $t8, 1
 		loop_seleccion_menu:
 			la $t1, control
 			lw $t2, ($t1)
 			andi $t2 , $t2, 0x01
 			beqz $t2, loop_seleccion_menu
 			la $t1, data  
-			lw $t2, ($t1) #0x00 00 00 00			
+			lw $t2, ($t1) 			
 			beq $t2, '\n', boton_enter
 			bne $t2, 's', loop_seleccion_menu
 			mulu $a1, $t8, 10  
