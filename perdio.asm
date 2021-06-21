@@ -10,7 +10,7 @@ perdio:
 		sw $ra, ($sp)
 		la $t1, coordenadaenY
 		lb $t2, ($t1)
-		bge $t2, 55, perdioLaPartida
+		beq $t2, 56, perdioLaPartida
 		la $t1, column_coord #Vector que tiene 3 posicions de columna
 		la $t0, img #Cargo la imagen
 		lb $t2, ($t1) #En t2 tengo la parte derecha de la primer Col

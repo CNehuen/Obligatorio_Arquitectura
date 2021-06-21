@@ -42,7 +42,7 @@ flappy_new_game:
 	li $t1, 10
 	sb $t1, 2($t0)
 	la $t0, scores
-	sb $zero, ($t0)
+	sw $zero, ($t0)
 	#Defino valores que simulen la funcion random
 	#Defino 12 valores y la posicion 0 del vector actua de indice
 	#Avanzo como si fuera un array circular y avanzo de a 7 posiciones por vez,
