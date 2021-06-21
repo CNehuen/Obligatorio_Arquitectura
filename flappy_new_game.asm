@@ -94,7 +94,7 @@ flappy_new_game:
 		li $a1, 23
 		li $a2, 30
 		jal dibujarString
-	li $v0, 32
+		li $v0, 32
 		li $a0, 5000
 		syscall
 	#-----EPILOGO-----#
