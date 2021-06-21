@@ -8,7 +8,9 @@ perdio:
 		#Guardo $ra en sp para no perderlo
 		addi $sp, $sp, -4
 		sw $ra, ($sp)
-
+		la $t1, coordenadaenY
+		lb $t2, ($t1)
+		bge $t2, 53, perdioLaPartida
 		la $t1, column_coord #Vector que tiene 3 posicions de columna
 		la $t0, img #Cargo la imagen
 		lb $t2, ($t1) #En t2 tengo la parte derecha de la primer Col
@@ -85,6 +87,9 @@ perdio:
 		addi $t4, $t4, 1
 		j RepBusqueda
 
+		
+		
+		
 perdioLaPartida:
 
 
