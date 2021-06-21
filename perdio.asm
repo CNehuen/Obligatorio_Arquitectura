@@ -18,7 +18,7 @@ perdio:
 		mul $t2, $t2, 4
 		addu $t8, $t0, $t2 #Se lo sumo a la imagen y lo asigno a t8
 		sub $t8, $t8, 40 #Le resto 40 posiciones para estar en la parte izq
-
+		move $t9, $zero #Contador del medio
 		##Si mi posicion en x de la columna SUPERIOR
 		##Toca con un blanco PERDIO
 		#Columna de arriba
@@ -29,18 +29,54 @@ perdio:
 		lw $t2, ($t8)
 		bne $t2, 0, perdioLaPartida #Si no es 0, osea no es negro perdio
 		addi $t8, $t8, 512 #Si es negro que sume 512
-		addi $t4, $t4, 1 #Que sume uno al contador hasta $t5
-		j RepetirBusqueda
-
+		addi $t4, $t4, 1 #Que sume uno al contador hasta $t3
+		j RepetirBusqueda	
+		
+		TodaviaSigueConVida:
+		#addi $t8, $t8, 512
+		addi $t8, $t8, 4
+		
+		bordeinterno:	
+		beq $t9, 9, sigueViviendo
+		addi $t8, $t8, 4
+		lw $t2, ($t8)
+		bne $t2, 0, perdioLaPartida
+		addi $t9, $t9, 1 
+		j bordeinterno
+		
+		sigueViviendo:	
+		sub $t8, $t8,40 
+		
+		j TodaviaSigueConVida2
+		
 		##Si mi posicion en x de la columna INFERIOR
 		##Toca con un blanco PERDIO
 		#Columna de abajo
-		TodaviaSigueConVida:
-		addi $t3, $t3, 20 #Sumo 20 que es la distancia
-		move $t4, $zero #Inicializo t4 en cero
+		TodaviaSigueConVida2:
+		addi $t3, $t3, 20 #Sumo 20 que es la distancia	
+		move $t4, $zero	
+		move $t9, $zero #Es para el borde 
 		addu $t4, $t4, $t3 #t4 es la altura mas la diferencia
-		li $t7, 10240 #512x20=10240
-		addu $t8, $t8, $t7 #En t8 sumo 4096
+		li $t7, 9728 #512x19=10752
+		addu $t8, $t8, $t7
+		addi $t8, $t8, 4		
+		
+		RecorroBorde:
+		beq $t9, 9, retrocedo
+		addi $t8, $t8, 4
+		lw $t2, ($t8)
+		bne $t2, 0, perdioLaPartida
+		addi $t9, $t9, 1
+		j RecorroBorde
+		
+		retrocedo: 
+		
+		sub $t8, $t8, 40
+		
+		
+		addi $t8, $t8, 512
+		j RepBusqueda
+		
 		RepBusqueda:
 		beq $t4, 63, Sobrevivio
 		lw $t2, ($t8)
@@ -49,14 +85,16 @@ perdio:
 		addi $t4, $t4, 1
 		j RepBusqueda
 
-
-
 perdioLaPartida:
+
+
+
 li $v0, 1
 j terminarVerificacion
 		                      
 Sobrevivio:
 li $v0, 0
+
 
 
 terminarVerificacion:
