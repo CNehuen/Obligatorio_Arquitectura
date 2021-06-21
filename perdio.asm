@@ -101,7 +101,7 @@ li $v0, 0
 
 
 terminarVerificacion:
-#-----EPILOGO-----#
+# -----EPILOGO-----#
 lw $ra , ($sp)
 addi $sp, $sp, 4
 
